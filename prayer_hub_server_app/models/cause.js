@@ -14,6 +14,10 @@ causeSchema.statics.findByCategory = function(category, cb){
 	return this.find({category: category}, cb);
 };
 
+causeSchema.statics.findByCreator = function(creator, cb){
+	return this.find({creator: creator}, cb);
+};
+
 var Cause = mongoose.model('Cause', causeSchema);
 
 module.exports = Cause;
