@@ -6,7 +6,8 @@ var causeSchema = new mongoose.Schema({
 	creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	category: String,
 	createdAt: Date,
-	expiration: Date
+	expiration: Date,
+	approved: {type: Boolean, default: false}
 });
 
 causeSchema.statics.findByCategory = function(category, cb){

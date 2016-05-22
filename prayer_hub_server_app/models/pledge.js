@@ -3,14 +3,15 @@ var User = require('./user');
 var Cause = require('./cause');
 
 var pledgeSchema = new mongoose.Schema({
-	user: User,
-	cause: Cause,
-	createdAt: Date,
-	pledgeAt: Date
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, //Who made the pledge
+	cause: {type: mongoose.Schema.Types.ObjectId, ref: 'Cause'}, //The cause they pledged for
+	createdAt: Date, //When the pledge was made
+	pledgeAt: Date,  //Date and time to be pledged
+	howLong: Number  //How long the pledge is for
 });
 
-pledgeSchema.statics.findByCategory = function(category, cb){
-	return this.find({category: category}, cb);
+pledgeSchema.statics.findByCause = function(cause, cb){
+	return this.find({cause: cause}, cb);
 };
 
 var Pledge = mongoose.model('Pledge', pledgeSchema);
