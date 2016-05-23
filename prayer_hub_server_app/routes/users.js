@@ -15,5 +15,5 @@ router.route('/:id')
 
 /*Ajax call to verify if an email already exists*/
 router.route('/email/:email')
-	.get(usersController.verifyEmail)
+	.get(usersController.verifyEmail);
 module.exports = router;

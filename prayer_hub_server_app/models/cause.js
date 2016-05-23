@@ -6,7 +6,7 @@ var causeSchema = new mongoose.Schema({
 	creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	category: String,
 	createdAt: Date,
-	expiration: Date,
+	expiration: {type: Date, default:null},
 	approved: {type: Boolean, default: false}
 });
 

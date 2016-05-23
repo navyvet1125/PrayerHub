@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var Cause = require('../models/cause');
-/* GET causes listing. */
-router.get('/', function(req, res, next) {
-	Cause.find({})
-	.then(function(causes){
-		res.status(200).send(causes);
-	})
-	.catch(function(err){
-		res.status(500).send(err);
-	});
-});
+var causesController = require('../controllers/causes_controller');
+
+/* GET users listing and create new users*/
+router.route('/')
+	.get(causesController.index)
+	.post(causesController.create);
+
+/*Show, update, and destroy a particular user*/
+router.route('/:id')
+	.get(causesController.show)
+	.put(causesController.update)
+	.delete(causesController.delete);
 
 module.exports = router;
