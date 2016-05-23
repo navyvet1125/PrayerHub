@@ -4,6 +4,8 @@ var favicon        = require('serve-favicon');
 var logger         = require('morgan');
 var cookieParser   = require('cookie-parser');
 var bodyParser     = require('body-parser');
+var passport       = require('passport');
+var expressSession = require('express-session');
 var routes         = require('./routes/index');
 var users          = require('./routes/users');
 var causes         = require('./routes/causes');
@@ -21,12 +23,26 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(expressSession({secret: 'mySecretKey', resave: false, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/causes', causes);
 app.use('/pledges', pledges);
+require('./config/passport')(passport);
+
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect:'/'}));
+app.get('/logout', function(req,res){
+  req.logout();
+  res.redirect('/');
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

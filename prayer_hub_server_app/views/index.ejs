@@ -7,5 +7,20 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <h2>Facebook Login Using Passport</h2>
+	<div>
+		<% if(user != undefined){ %>
+			<h2>Below is the data sent by Facebook</h2>
+			<pre><%= user.name %></pre>
+			<pre><%= user.email %></pre>
+			<img src="<%= user.avatar %>" />
+			<br/>
+
+			<a href="/logout">logout</a>
+		<% } else { %>
+			<a href="/auth/facebook">Login with Facebook</a>
+		<% } %>
+	</div>
+
   </body>
 </html>

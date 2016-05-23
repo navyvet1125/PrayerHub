@@ -13,6 +13,7 @@ var userSchema = new mongoose.Schema({
 	    'admin' 
 	]},
 	name: String,
+	avatar: String,
 	email: String,
 	avatar: String,
 	city: String,
