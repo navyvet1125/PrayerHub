@@ -9,21 +9,27 @@ var userSchema = new mongoose.Schema({
 	//approve, or remove causes.  
 	role: {type: 'String', enum: [
 	    'new User',
-	    'contributer', 
+	    'contributor', 
 	    'admin' 
-	]},
-	name: String,
+	], default:'new User'},
+	name: {type: String, required:true},
 	avatar: String,
-	email: String,
+	email: {type: String, unique:true, required: true},
 	city: String,
 	pledges: {type: Number, default: 0},
 	fb_access_token: String,
-	password: String,
+	password: {type: String, required: true}
+
 });
+
+userSchema.plugin(require('mongoose-bcrypt'));
 
 //search users by role
 userSchema.statics.findByRole = function(role, cb){
 	return this.find({role: role}, cb);
+};
+userSchema.statics.findByEmail = function(email, cb){
+	return this.findOne({email: email}, cb);
 };
 
 userSchema.statics.searchNameAndRole = function(name, role, cb){

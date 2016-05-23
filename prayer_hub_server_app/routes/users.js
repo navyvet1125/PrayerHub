@@ -1,15 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-	User.find({})
-	.then(function(users){
-		res.status(200).send(users);
-	})
-	.catch(function(err){
-		res.status(500).send(err);
-	});
-});
+var usersController = require('../controllers/users_controller');
 
+/* GET users listing and create new users*/
+router.route('/')
+	.get(usersController.index)
+	.post(usersController.create);
+
+/*Show, update, and destroy a particular user*/
+router.route('/:id')
+	.get(usersController.show)
+	.put(usersController.update)
+	.delete(usersController.delete);
+
+/*Ajax call to verify if an email already exists*/
+router.route('/email/:email')
+	.get(usersController.verifyEmail)
 module.exports = router;
