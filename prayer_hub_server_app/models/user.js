@@ -16,10 +16,8 @@ var userSchema = new mongoose.Schema({
 	avatar: String,
 	email: String,
 	city: String,
-
+	pledges: {type: Number, default: 0},
 	fb_access_token: String,
-	twitter_access_token: String,
-	google_access_token: String,
 	password: String,
 });
 
