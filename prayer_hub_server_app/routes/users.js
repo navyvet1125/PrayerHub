@@ -13,6 +13,14 @@ router.route('/:id')
 	.put(usersController.update)
 	.delete(usersController.delete);
 
+/*Show all pledges of a user */ 
+router.route('/:id/pledges')
+	.get(usersController.showPledges);
+
+/*Show all causes of a user */ 
+router.route('/:id/causes')
+	.get(usersController.showCauses);
+
 /*Ajax call to verify if an email already exists*/
 router.route('/email/:email')
 	.get(usersController.verifyEmail);

@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var User = require('./user');
+var Pledge = require('./pledge');
+
 var causeSchema = new mongoose.Schema({
 	title: String,
 	body: String,
@@ -16,6 +18,10 @@ causeSchema.statics.findByCategory = function(category, cb){
 
 causeSchema.statics.findByCreator = function(creator, cb){
 	return this.find({creator: creator}, cb);
+};
+
+causeSchema.statics.findPledgesById = function(cause, cb){
+	return Pledge.find({cause: cause}, cb);
 };
 
 var Cause = mongoose.model('Cause', causeSchema);

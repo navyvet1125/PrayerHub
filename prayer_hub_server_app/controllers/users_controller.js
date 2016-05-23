@@ -96,4 +96,27 @@ controller.verifyEmail = function(req,res){
 
 };
 
+controller.showPledges = function(req,res){
+	User.findPledgesById(req.params.id)
+		.then(function(pledges){
+			//if it worked
+			res.status(200).send(pledges);
+		})
+		.catch(function(err){
+			//if it didn't
+			res.status(500).send(err);
+		});
+};
+
+controller.showCauses = function(req,res){
+	User.findCausesById(req.params.id)
+		.then(function(causes){
+			//if it worked
+			res.status(200).send(causes);
+		})
+		.catch(function(err){
+			//if it didn't
+			res.status(500).send(err);
+		});
+};
 module.exports = controller;

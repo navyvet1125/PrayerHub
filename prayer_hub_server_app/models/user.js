@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var Cause = require('./cause');
+var Pledge = require('./pledge');
 
 var userSchema = new mongoose.Schema({
 	//New Users are people who have either only recently signed up 
@@ -18,7 +20,7 @@ var userSchema = new mongoose.Schema({
 	city: String,
 	pledges: {type: Number, default: 0},
 	fb_access_token: String,
-	password: {type: String, required: true}
+	password: String
 
 });
 
@@ -30,6 +32,15 @@ userSchema.statics.findByRole = function(role, cb){
 };
 userSchema.statics.findByEmail = function(email, cb){
 	return this.findOne({email: email}, cb);
+};
+
+
+userSchema.statics.findPledgesById = function(id, cb){
+	return Pledge.find({user: id}, cb);
+};
+
+userSchema.statics.findCausesById = function(id, cb){
+	return Cause.find({creator: id}, cb);
 };
 
 userSchema.statics.searchNameAndRole = function(name, role, cb){
