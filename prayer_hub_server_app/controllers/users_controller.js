@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var Pledge = require('../models/pledge');
 var controller ={};
 
 controller.index = function(req, res) {
@@ -97,13 +98,14 @@ controller.verifyEmail = function(req,res){
 };
 
 controller.showPledges = function(req,res){
-	User.findPledgesById(req.params.id)
+	User.findCausesByPledgesById(req.params.id)
 		.then(function(pledges){
-			//if it worked
+			console.log(pledges)
 			res.status(200).send(pledges);
 		})
 		.catch(function(err){
 			//if it didn't
+			console.log(err);
 			res.status(500).send(err);
 		});
 };

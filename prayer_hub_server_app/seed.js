@@ -42,7 +42,15 @@ User.remove({})
     			createdAt: new Date(),
     			pledgeAt: new Date(),
     			howLong: 30
-    		}
+    		},
+            {
+                user:seedUser._id,
+                cause:seedCause._id,
+                createdAt: new Date(),
+                pledgeAt: new Date(),
+                howLong: 30
+            }
+
     	]);
 
     })
@@ -53,4 +61,3 @@ User.remove({})
     	console.log(pledge);
     	process.exit();
     });
-

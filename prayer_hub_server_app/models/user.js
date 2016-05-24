@@ -43,6 +43,19 @@ userSchema.statics.findCausesById = function(id, cb){
 	return Cause.find({creator: id}, cb);
 };
 
+userSchema.statics.findCausesByPledgesById = function(id, cb){
+	return Pledge.find({user: id})
+		.then(function(pledges){
+			var causes =[];
+			pledges.forEach(function(pledge){
+				causes.push( new mongoose.Types.ObjectId(pledge.id));
+			});
+			console.log('CAUSES!!!!!!!!',causes);
+			return Cause.find({'id': { $in: causes}});
+		});
+};
+
+
 userSchema.statics.searchNameAndRole = function(name, role, cb){
 	this.find({role: role}, function(err, users){
 		if(err) return err;
