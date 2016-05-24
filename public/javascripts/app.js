@@ -7,11 +7,16 @@ function configuration($stateProvider, $urlRouterProvider) {
   //
   //
   // For any unmatched url, redirect to /search
-  // $urlRouterProvider.otherwise("/search");
+  $urlRouterProvider.otherwise("/");
   //
   // Now set up the states
   $stateProvider
     .state('index', {
+      url: "/_=_",
+      templateUrl: "partials/index.html",
+      controller: 'IndexController as indexCtrl'
+    })
+    .state('home', {
       url: "",
       templateUrl: "partials/index.html",
       controller: 'IndexController as indexCtrl'

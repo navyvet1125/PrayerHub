@@ -15,7 +15,7 @@ var passportFb = function(passport){
 	passport.use('facebook', new FacebookStrategy({
 		clientID: process.env.FACEBOOK_API_KEY,
 		clientSecret: process.env.FACEBOOK_API_SECRET,
-		callbackURL: process.env.FACEBOOK_APP_URL,
+		callbackURL: process.env.FACEBOOK_APP_URL+'/',
 		enableProof: true,
 		profileFields: ['id', 'name','picture.type(large)', 'emails']
 	}, function(access_token, refresh_token, profile, done){
