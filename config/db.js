@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var mongoUrl = process.env.PRAYER_HUB_MONGO_URI;
+var mongoUrl = process.env.MONGODB_URI;
 
 mongoose.connect(mongoUrl, function(err){
   if(err){
