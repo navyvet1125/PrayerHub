@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
   <script src="/javascripts/app.js"></script>
-  <script type="text/javascript" src="/javascripts/getToken.js"></script>
+  <script src="/javascripts/indexController.js"></script>
   <style>    
     /* Set black background color, white text and some padding */
     footer {
@@ -19,6 +19,8 @@
   </style>
 </head>
 <body>
+{{2+2}}
+ <input type="hidden" id="jwts" value="<%= token %>"/>
  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -64,60 +66,8 @@
             <h4>Reconnecting the world to the divine</h4>
           </div>
         </div>
-        
-        <h2>New Causes</h2>
-        <hr>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="well">
-             <h4>World Peace</h4>
-            </div>
-          </div>
-          <div class="col-sm-9">
-            <div class="well">
-              <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="well">
-             <p>Bo</p>
-             <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-            </div>
-          </div>
-          <div class="col-sm-9">
-            <div class="well">
-              <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="well">
-             <p>Jane</p>
-             <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-            </div>
-          </div>
-          <div class="col-sm-9">
-            <div class="well">
-              <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="well">
-             <p>Anja</p>
-             <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-            </div>
-          </div>
-          <div class="col-sm-9">
-            <div class="well">
-              <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-            </div>
-          </div>
-        </div>     
+        <div ui-view></div>
+             
       </div>
       <div class="col-sm-2 well">
         <h3>Upcoming Pledges</h3>
@@ -146,5 +96,6 @@
   <footer class="container-fluid text-center">
     <p>Prayer HubⒸ 2016</p>
   </footer>
+  <script type="text/javascript" src="/javascripts/getToken.js"></script>
 </body>
 </html>

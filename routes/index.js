@@ -17,6 +17,6 @@ router.get('/dashboard', function(req, res, next) {
 	    },
 	    secret
 	 );
-	res.render('dashboard', {title:'PrayerHub', user:req.user});
+	res.render('dashboard', {title:'PrayerHub', user:req.user, token:token});
 });
 module.exports = router;
