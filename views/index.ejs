@@ -3,31 +3,13 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-	<script src="/javascripts/jquery.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <h2>Facebook Login Using Passport</h2>
 	<div>
-		<% if(user != undefined){ %>
-			<h2>Welcome <%= user.name %></h2>
-			<img src="<%= user.avatar %>" />
-			<br/>
-			<div>
-				<h3>Causes:</h3>
-				<ul id="causes-list"></ul>
-				<h3>Pledges:</h3>
-				<ul id="pledges-list"></ul>
-			</div>
-			<input type="hidden" value="<%= token %>" id="jwts"/>
-			<input type="hidden" value="<%= user.id %>" id="user-info"/>
-			<script type="text/javascript" src="/javascripts/getToken.js"></script>
-			<a href="/logout">logout</a>
-		<% } else { %>
-			<a href="/auth/facebook">Login with Facebook</a>
-			<script type="text/javascript"></script>
-		<% } %>
+		<a href="/auth/facebook">Login with Facebook</a>
 	</div>
   </body>
 </html>

@@ -98,9 +98,9 @@ controller.verifyEmail = function(req,res){
 };
 
 controller.showPledges = function(req,res){
-	User.findCausesByPledgesById(req.params.id)
+	User.findPledgesById(req.params.id)
 		.then(function(pledges){
-			console.log(pledges)
+			console.log(pledges);
 			res.status(200).send(pledges);
 		})
 		.catch(function(err){

@@ -6,13 +6,17 @@ var secret = 'archeopteryx';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  res.render('index', { title: 'PrayerHub'});
+});
+
+/* Dashboard */
+router.get('/dashboard', function(req, res, next) {
 	var token = jwt.sign(
 	    {
 	      user: req.user
 	    },
 	    secret
 	 );
-  res.render('index', { title: 'PrayerHub' , user:req.user, token:token});
+	res.render('dashboard', {title:'PrayerHub', user:req.user});
 });
-
 module.exports = router;

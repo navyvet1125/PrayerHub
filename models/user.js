@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
 	email: {type: String, unique:true, required: true},
 	city: String,
 	pledges: {type: Number, default: 0},
+	causes: {type: Number, default: 0},
 	fb_access_token: String,
 	password: String
 
@@ -48,10 +49,9 @@ userSchema.statics.findCausesByPledgesById = function(id, cb){
 		.then(function(pledges){
 			var causes =[];
 			pledges.forEach(function(pledge){
-				causes.push( new mongoose.Types.ObjectId(pledge.id));
+				causes.push( pledge.cause);
 			});
-			console.log('CAUSES!!!!!!!!',causes);
-			return Cause.find({'id': { $in: causes}});
+			return Cause.find({'_id': { $in: causes}});
 		});
 };
 
@@ -61,7 +61,6 @@ userSchema.statics.searchNameAndRole = function(name, role, cb){
 		if(err) return err;
 		var person;
 		users.forEach(function(user){
-			console.log(user.name);
 			if(user.name.toLowerCase() === name.toLowerCase())person = user;
 		});
 		return cb(err, person);
