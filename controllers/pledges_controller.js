@@ -18,7 +18,9 @@ controller.create = function(req,res){
 	//creates a new pledge
 	var newPledge = new Pledge();
 	newPledge.user = req.body.user;
-	newPledge.cause = req.body.cause;
+	newPledge.userName = req.body.userName;
+	newPledge.title = req.body.title;
+	newPledge.causeName = req.body.causeName;
 	newPledge.howLong = req.body.howLong;
 	newPledge.createdAt = new Date();
 	newPledge.pledgeAt = req.body.pledgeAt;

@@ -6,15 +6,21 @@
 	{{causeViewCtrl.currentCause.body}}
 </p>
 <h3>Make a pledge</h3>
-<p>
-  <label for="date">Date</label>
-  <input type="date" name="date" ng-model="causeViewCtrl.newPledge.date">
-</p>
-<form ng-submit="causeViewCtrl.submitNewPledge(appCtrl)">
-  <label for="hour">Time</label>
-  <select ng-model="causeViewCtrl.newPledge.hour" ng-options="item for item in causeViewCtrl.hours"></select><span> :</span>
-  <select ng-model="causeViewCtrl.newPledge.minutes" ng-options="item for item in causeViewCtrl.minutes"></select>
-  <select ng-model="causeViewCtrl.newPledge.amOrPm" ng-options="item for item in causeViewCtrl.amOrPm"></select>
+<form ng-submit="causeViewCtrl.submitNewPledge(appCtrl.user)">
+	<p>
+	  <label for="date">Date</label>
+	  <input type="date" name="date" ng-model="causeViewCtrl.newPledge.date">
+	</p>
+	<p>
+	  <label for="hour">Time</label>
+	  <select ng-model="causeViewCtrl.newPledge.hour" ng-options="item for item in causeViewCtrl.hours"></select><span> :</span>
+	  <select ng-model="causeViewCtrl.newPledge.minutes" ng-options="item for item in causeViewCtrl.minutes"></select>
+	  <select ng-model="causeViewCtrl.newPledge.amOrPm" ng-options="item for item in causeViewCtrl.amOrPm"></select>
+	</p>
+	<p>
+	  <label>Duration</label>
+	  <select ng-model="causeViewCtrl.newPledge.howLong" ng-options="item for item in causeViewCtrl.howLong"></select>
+	</p>
   <div>
 	  <input type="submit" class="btn btn-success btn-lg"/>
   </div>
