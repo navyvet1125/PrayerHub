@@ -15,4 +15,7 @@ router.route('/:id')
 	.put(tokens.verify, causesController.update)
 	.delete(tokens.verify, causesController.delete);
 
+router.route('/:id/pledges')
+	.get(tokens.verify, causesController.showPledges)
+
 module.exports = router;

@@ -83,6 +83,18 @@ controller.delete = function(req,res){
 
 };
 
-
+controller.showPledges = function(req,res){
+	//find and return all pledges linked to a specific cause
+	Cause.findPledgesById(req.params.id)
+		.then(function(pledges){
+			if(pledges)res.status(200).send(pledges);
+			//error handling
+			else res.status(404).send({status: 404, message:'Cause not found!'});
+		})
+		.catch(function(err){
+			//error handling
+			res.status(500).send(err);
+		});
+};
 
 module.exports = controller;
