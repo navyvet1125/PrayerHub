@@ -12,7 +12,7 @@ controller.verify = function(req, res, next) {
       message: 'Authentication failed: missing auth header'
     });
   }
-  console.log('verifying token', authHeader);
+  console.log('verifying token');
   var token = authHeader.split(' ')[1];
   jwt.verify(token, secret, function(err, decoded){
     if (err) return next(err);

@@ -33,6 +33,7 @@ function AppController ($stateParams, $state, $http){
 			} 
 		}).then(function(response){
 				self.pledges = response.data;
+				
 			});
 	}
 }

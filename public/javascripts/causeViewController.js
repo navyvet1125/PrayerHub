@@ -105,10 +105,9 @@ function CauseViewController($stateParams, $http){
 		newTime +='/'+monthFormatter;
 		newTime +='/'+self.newPledge.date.getDate().toString();
 		newTime +=' '+self.newPledge.hour+':'+self.newPledge.minutes+' '+self.newPledge.amOrPm;
-		
 		var formattedPledge ={
-			user: main,
-			userName: main.name,
+			user: main.user,
+			userName: main.user.name,
 			cause: self.currentCause,
 			title: self.currentCause.title,
 			howLong: self.newPledge.howLong,
@@ -123,13 +122,26 @@ function CauseViewController($stateParams, $http){
 			data: formattedPledge
 
 		}).then(function(response){
-			console.log(response);
-				// self.pledges = response.data;
-			});
+			if(response.status===200){
+				$http({
+					method: 'PUT',
+					url: '/users/'+main.user._id,
+					headers:{
+						"Authorization": "Bearer " + self.token
+					},
+					data: {pledges:main.user.pledges+1}
+				})
+				.then(function(response){
+					main.user = response.data;
+					main.displayPledges();
+				})
+				.catch(function(err){
+					console.log(err.data.message);
+				});
+			}		});
 
 
 	}
 	self.getTime();
 	self.getCause();
 }
-

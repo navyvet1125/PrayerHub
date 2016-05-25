@@ -16,6 +16,6 @@ router.route('/:id')
 	.delete(tokens.verify, causesController.delete);
 
 router.route('/:id/pledges')
-	.get(tokens.verify, causesController.showPledges)
+	.get(tokens.verify, causesController.showPledges);
 
 module.exports = router;

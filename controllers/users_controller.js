@@ -50,10 +50,13 @@ controller.update = function(req,res){
 	//Find and update a user
 	User.findById(req.params.id)
 	.then(function(user){
-		user.name = req.body.name;
-		user.email = req.body.email;
-		user.role = req.body.role;
-		user.password = req.body.password;
+		//Update only what is applicable
+		if(req.body.name) user.name = req.body.name;
+		if(req.body.email) user.email = req.body.email;
+		if(req.body.role) user.role = req.body.role;
+		if(req.body.password) user.password = req.body.password;
+		if(req.body.pledges) user.pledges = req.body.pledges;
+		if(req.body.causes) user.causes = req.body.causes;
 		return user.save();
 	})
 	.then(function(user){
