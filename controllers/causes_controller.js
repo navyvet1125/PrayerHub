@@ -2,8 +2,17 @@ var Cause = require('../models/cause');
 var controller ={};
 
 controller.index= function(req, res, next) {
-	//Returns listing of all causes
-	Cause.find({})
+	var query;
+	if(req.query.limit){
+		//measure to mitigate a potential DoS attack
+		if(req.query.limit > 10) req.query.limit=10;
+
+		query = Cause.find({}).limit(req.query.limit);
+	} else {
+		query = Cause.find({});
+	}
+	//find and return all pledges linked to a specific cause
+	query.exec()
 	.then(function(causes){
 		//if it worked
 		res.status(200).send(causes);
@@ -84,9 +93,12 @@ controller.delete = function(req,res){
 };
 
 controller.showPledges = function(req,res){
-	console.log('REQUEST QUERIES', req.query);
+	// console.log('REQUEST QUERIES', req.query);
 	var query;
 	if(req.query.limit){
+		//measure to mitigate a potential DoS attack
+		if(req.query.limit > 10) req.query.limit=10;
+
 		query = Cause.findPledgesById(req.params.id).limit(req.query.limit);
 	} else {
 		query = Cause.findPledgesById(req.params.id);

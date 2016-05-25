@@ -105,7 +105,6 @@ function CauseViewController($stateParams, $http){
 		newTime +='/'+monthFormatter;
 		newTime +='/'+self.newPledge.date.getDate().toString();
 		newTime +=' '+self.newPledge.hour+':'+self.newPledge.minutes+' '+self.newPledge.amOrPm;
-		console.log(self.currentCause);
 		var formattedPledge ={
 			user: main.user,
 			userName: main.user.name,
@@ -123,7 +122,6 @@ function CauseViewController($stateParams, $http){
 			data: formattedPledge
 
 		}).then(function(response){
-			console.log(response);
 			if(response.status===200){
 				$http({
 					method: 'PUT',
@@ -134,6 +132,7 @@ function CauseViewController($stateParams, $http){
 					data: {pledges:main.user.pledges+1}
 				})
 				.then(function(response){
+					//update all layers of the SPA to changes made
 					main.user = response.data;
 					main.displayPledges();
 					self.getPledges();

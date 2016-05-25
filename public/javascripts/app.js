@@ -17,7 +17,7 @@ function configuration($stateProvider, $urlRouterProvider) {
       controller: 'IndexController as indexCtrl', 
     })
     .state('home', {
-      url: "",
+      url: "/",
       templateUrl: "partials/index.html",
       controller: 'IndexController as indexCtrl'
     })

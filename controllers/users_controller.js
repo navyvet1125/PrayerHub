@@ -103,7 +103,16 @@ controller.verifyEmail = function(req,res){
 };
 
 controller.showPledges = function(req,res){
-	User.findPledgesById(req.params.id)
+	var query;
+	if(req.query.limit){
+		//measure to mitigate a potential DoS attack
+		if(req.query.limit > 10) req.query.limit=10;
+		query =User.findPledgesById(req.params.id).limit(req.query.limit).sort({ pledgeAt: 1 });
+	}
+	else {
+		query =User.findPledgesById(req.params.id);
+	}
+	query.exec()
 		.then(function(pledges){
 			res.status(200).send(pledges);
 		})

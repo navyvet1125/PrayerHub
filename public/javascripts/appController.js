@@ -27,7 +27,7 @@ function AppController ($stateParams, $state, $http){
 		var token = localStorage.getItem('token');
 		$http({
 		  method: 'GET',
-		  url: '/users/'+self.user._id+'/pledges',
+		  url: '/users/'+self.user._id+'/pledges?limit=3',
 		  headers:{
 				"Authorization": "Bearer " + token
 			} 

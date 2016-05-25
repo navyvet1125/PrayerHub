@@ -34,8 +34,8 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Causes</a></li>
-          <li><a href="#">Pledges</a></li>
+          <li><a ui-sref="causes">Causes</a></li>
+          <li><a ui-sref="pledges">Pledges</a></li>
           <li><a href="#">About</a></li>
           <li><a href="/logout"> Sign Out</a></li>
         </ul>
@@ -80,7 +80,7 @@
           <p>Time: {{pledge.pledgeAt| date: "hh:mm a"}}</p>
           <p>Duration: {{pledge.howLong| duration}}</p>
         </div>      
-            
+        <a ui-sref='pledges'>more...</a>
       </div>
     </div>
   </div>

@@ -15,7 +15,7 @@ function IndexController ($stateParams, $state, $http){
 		var token = localStorage.getItem('token');
 		$http({
 		  method: 'GET',
-		  url: '/causes',
+		  url: '/causes?limit=10',
 		  headers:{
 				"Authorization": "Bearer " + token
 			} 
