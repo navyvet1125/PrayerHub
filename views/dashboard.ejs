@@ -4,7 +4,7 @@
   <title><%= title %></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
   <script src="/javascripts/app.js"></script>
@@ -29,14 +29,12 @@
         <a class="navbar-brand" href="#">Prayer Hub</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">Causes</a></li>
           <li><a href="#">Pledges</a></li>
           <li><a href="#">About</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{appCtrl.user.name}}</a></li>
+          <li><a href="/logout"> Sign Out</a></li>
         </ul>
       </div>
     </div>
@@ -59,7 +57,7 @@
         <p><a href="#">About</a></p>
         <p><a ui-sref="causes">Causes</a></p>
         <p><a href="#">Pledges</a></p>
-        <p><a href="/logout">Logout</a></p>
+        <p><a href="/logout">Sign Out</a></p>
       </div>
       <div class="col-sm-7">
         <div class="row">
