@@ -2,8 +2,11 @@ var Pledge = require('../models/pledge');
 var controller ={};
 
 controller.index= function(req, res, next) {
+	console.log('REQUEST QUERY PARAMS', req.query);
+	var query = Pledge.find({});
 	//Returns listing of all pledges
-	Pledge.find({})
+	// Pledge.find({})
+	query.exec()
 	.then(function(pledges){
 		//if it worked
 		res.status(200).send(pledges);
@@ -20,7 +23,7 @@ controller.create = function(req,res){
 	newPledge.user = req.body.user;
 	newPledge.userName = req.body.userName;
 	newPledge.title = req.body.title;
-	newPledge.causeName = req.body.causeName;
+	newPledge.cause = req.body.cause;
 	newPledge.howLong = req.body.howLong;
 	newPledge.createdAt = new Date();
 	newPledge.pledgeAt = req.body.pledgeAt;

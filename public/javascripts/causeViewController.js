@@ -40,8 +40,8 @@ function CauseViewController($stateParams, $http){
 			} 
 		}).then(function(response){
 				self.currentCause = response.data;
+				self.getPledges();
 			});
-		self.getPledges();
 	}
 
 	//Get all the pledges for a specific cause
@@ -105,6 +105,7 @@ function CauseViewController($stateParams, $http){
 		newTime +='/'+monthFormatter;
 		newTime +='/'+self.newPledge.date.getDate().toString();
 		newTime +=' '+self.newPledge.hour+':'+self.newPledge.minutes+' '+self.newPledge.amOrPm;
+		console.log(self.currentCause);
 		var formattedPledge ={
 			user: main.user,
 			userName: main.user.name,
@@ -122,6 +123,7 @@ function CauseViewController($stateParams, $http){
 			data: formattedPledge
 
 		}).then(function(response){
+			console.log(response);
 			if(response.status===200){
 				$http({
 					method: 'PUT',
@@ -134,6 +136,7 @@ function CauseViewController($stateParams, $http){
 				.then(function(response){
 					main.user = response.data;
 					main.displayPledges();
+					self.getPledges();
 				})
 				.catch(function(err){
 					console.log(err.data.message);

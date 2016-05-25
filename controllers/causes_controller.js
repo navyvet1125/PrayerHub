@@ -84,8 +84,15 @@ controller.delete = function(req,res){
 };
 
 controller.showPledges = function(req,res){
+	console.log('REQUEST QUERIES', req.query);
+	var query;
+	if(req.query.limit){
+		query = Cause.findPledgesById(req.params.id).limit(req.query.limit);
+	} else {
+		query = Cause.findPledgesById(req.params.id);
+	}
 	//find and return all pledges linked to a specific cause
-	Cause.findPledgesById(req.params.id)
+	query.exec()
 		.then(function(pledges){
 			if(pledges)res.status(200).send(pledges);
 			//error handling

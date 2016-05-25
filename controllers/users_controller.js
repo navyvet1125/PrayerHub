@@ -105,12 +105,10 @@ controller.verifyEmail = function(req,res){
 controller.showPledges = function(req,res){
 	User.findPledgesById(req.params.id)
 		.then(function(pledges){
-			console.log(pledges);
 			res.status(200).send(pledges);
 		})
 		.catch(function(err){
 			//if it didn't
-			console.log(err);
 			res.status(500).send(err);
 		});
 };
