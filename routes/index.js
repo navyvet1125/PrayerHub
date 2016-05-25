@@ -10,13 +10,15 @@ router.get('/', function(req, res, next) {
 });
 
 /* Dashboard */
-router.get('/dashboard', function(req, res, next) {
-	var token = jwt.sign(
-	    {
-	      user: req.user
-	    },
-	    secret
-	 );
-	res.render('dashboard', {title:'PrayerHub', user:req.user, token:token});
-});
+router.route('/dashboard')
+	.get(require('connect-ensure-login').ensureLoggedIn('/'), function(req, res, next) {
+		var token = jwt.sign(
+		    {
+		      user: req.user
+		    },
+		    secret
+		 );
+		res.render('dashboard', {title:'PrayerHub', user:req.user, token:token});
+	});
+
 module.exports = router;

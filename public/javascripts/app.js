@@ -14,7 +14,7 @@ function configuration($stateProvider, $urlRouterProvider) {
     .state('index', {
       url: "/_=_",
       templateUrl: "partials/index.html",
-      controller: 'IndexController as indexCtrl'
+      controller: 'IndexController as indexCtrl', 
     })
     .state('home', {
       url: "",
@@ -25,6 +25,11 @@ function configuration($stateProvider, $urlRouterProvider) {
       url: "/causes",
       templateUrl: "partials/causes.html",
       controller: 'CausesController as causesCtrl'
+    })
+    .state('causeView', {
+      url: "/causes/:id",
+      templateUrl: "partials/causeView.html",
+      controller: 'CauseViewController as causeViewCtrl'
     })
     .state('pledges', {
       url: "/pledges",

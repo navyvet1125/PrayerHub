@@ -1,0 +1,10 @@
+    <p>
+      <label for="date">Date</label>
+      <input type="date" name="date" ng-model="causesCtrl.newCause.date">
+    </p>
+    <p>
+      <label for="hour">Time</label>
+      <select ng-model="causesCtrl.newCause.hour" ng-options="item for item in causesCtrl.hours"></select><span> :</span>
+      <select ng-model="causesCtrl.newCause.minutes" ng-options="item for item in causesCtrl.minutes"></select>
+      <select ng-model="causesCtrl.newCause.amOrPm" ng-options="item for item in causesCtrl.amOrPm"></select>
+    </p>

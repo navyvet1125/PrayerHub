@@ -1,16 +1,26 @@
 angular
 	.module('prayerHubApp')
-	.controller('IndexController', IndexController);
+	.controller('CausesController', CausesController);
 
-function IndexController ($stateParams, $state, $http){
+function CausesController ($stateParams, $state, $http){
 	var self = this;
 	self.displayCauses = displayCauses;
 	self.initialize = initialize;
 	self.causes = [];
+	self.newCause = {};
+	self.categories = ['General','Specific'];
+	self.newCause.category ='General';
+	self.action = action;
+
+	function action(main){
+		console.log('taking action!');
+	}
 
 	function initialize(user){
 		self.user = user;
 	}
+
+
 	function displayCauses(){
 		var token = localStorage.getItem('token');
 		$http({

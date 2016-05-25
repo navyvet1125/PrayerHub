@@ -8,7 +8,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
   <script src="/javascripts/app.js"></script>
+  <script src="/javascripts/appController.js"></script>
   <script src="/javascripts/indexController.js"></script>
+  <script src="/javascripts/causesController.js"></script>
+  <script src="/javascripts/causeViewController.js"></script>
   <style>    
     /* Set black background color, white text and some padding */
     footer {
@@ -18,28 +21,9 @@
     }
   </style>
 </head>
-<body>
-<!-- Facebook told me I needed to add this -->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '700059076803507',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- end FB add -->
- <input type="hidden" id="jwts" value="<%= token %>"/>
- <nav class="navbar navbar-inverse">
+<body ng-controller="AppController as appCtrl" ng-init="appCtrl.initialize(<%= JSON.stringify(user) %>, <%= JSON.stringify(token) %> )">
+  <input type="hidden" id="jwts" ng-model="appCtrl.token" value="<%= token %>"/>
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Prayer Hub</a>
@@ -52,7 +36,7 @@
           <li><a href="#">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> <%= user.name %></a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{appCtrl.user.name}}</a></li>
         </ul>
       </div>
     </div>
@@ -63,17 +47,17 @@
       <div class="col-sm-3 well">
         <div class="well">
           <p><a href="#">My Profile</a></p>
-          <img src="<%= user.avatar %>" class="img-circle" height="100" width="100" alt="Avatar">
+          <img ng-src="{{appCtrl.user.avatar}}" class="img-circle" height="100" width="100" alt="Avatar">
         </div>
         <div class="well">  
           <big>Stats</big>
           <hr>
-          <p>Pledges made: <%= user.pledges %></p>
-          <p>User Status: <%= user.role %> </p>
-          <p>Causes created: <%= user.causes %></p>
+          <p>Pledges made: {{appCtrl.user.pledges}}</p>
+          <p>User Status: {{appCtrl.user.role}} </p>
+          <p>Causes created: {{appCtrl.user.causes}}</p>
         </div>
         <p><a href="#">About</a></p>
-        <p><a href="#">Causes</a></p>
+        <p><a ui-sref="causes">Causes</a></p>
         <p><a href="#">Pledges</a></p>
         <p><a href="/logout">Logout</a></p>
       </div>
@@ -84,36 +68,23 @@
             <h4>Reconnecting the world to the divine</h4>
           </div>
         </div>
-        <div ui-view></div>
-             
+        <div ui-view onload="indexCtrl.initialize(<%= JSON.stringify(user) %>)"></div>
       </div>
       <div class="col-sm-2 well">
         <h3>Upcoming Pledges</h3>
-        <div class="well">
+        <div class="well" ng-repeat="pledge in appCtrl.pledges">
           <p>Upcoming Pledge:</p>
-          <p><strong>Paris</strong></p>
-          <p>Fri. 27 November 2015</p>
-          <p>10:30pm to 11:00pm</p>
+          <p><strong>{{pledge.title}}</strong></p>
+          <p>Date: {{pledge.pledgeAt| date: "MMMM dd, yyyy"}}</p>
+          <p>Time: {{pledge.pledgeAt| date: "hh:mm a"}}</p>
+          <p>Duration: {{pledge.howLong| duration}}</p>
         </div>      
-        <div class="well">
-          <p>Upcoming Pledge:</p>
-          <p><strong>Paris</strong></p>
-          <p>Fri. 27 November 2015</p>
-          <p>10:30pm to 11:00pm</p>
-        </div>      
-        <div class="well">
-          <p>Upcoming Pledge:</p>
-          <p><strong>Paris</strong></p>
-          <p>Fri. 27 November 2015</p>
-          <p>10:30pm to 11:00pm</p>
-        </div>      
+            
       </div>
     </div>
   </div>
-
   <footer class="container-fluid text-center">
     <p>Prayer HubⒸ 2016</p>
   </footer>
-  <script type="text/javascript" src="/javascripts/getToken.js"></script>
 </body>
 </html>

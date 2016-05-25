@@ -14,7 +14,7 @@ User.remove({})
 	})
  	.then(function(){
   		return User.create([
-    		{name:'Evan Washington', email:'enavy04@gmail.com', role:'admin', city:'Inglewood' },
+    		{name:'Evan Washington', email:'enavy04@gmail.com', role:'admin', city:'Inglewood', pledges:2, causes:2 },
     	]);
   	})
   	.then(function(user){
@@ -29,7 +29,16 @@ User.remove({})
     			createdAt: new Date(),
     			expiration: null,
     			approved: true
-    		}
+    		},
+                    {
+                title:'Healing for Earth',
+                body:'Sending positive vibes to the planet',
+                creator: user[0]._id,
+                category: 'General',
+                createdAt: new Date(),
+                expiration: null,
+                approved: true
+            }
     	]);
     })
     .then(function(cause){
@@ -38,6 +47,7 @@ User.remove({})
     	return Pledge.create([
     		{
     			user:seedUser._id,
+                title: seedCause.title,
     			cause:seedCause._id,
     			createdAt: new Date(),
     			pledgeAt: new Date(),
@@ -45,10 +55,11 @@ User.remove({})
     		},
             {
                 user:seedUser._id,
-                cause:seedCause._id,
+                title:cause[1].title,
+                cause:cause[1]._id,
                 createdAt: new Date(),
                 pledgeAt: new Date(),
-                howLong: 30
+                howLong: 90
             }
 
     	]);

@@ -1,14 +1,14 @@
 <h2>New Causes</h2>
 <hr>
-<div class="row">
+<div class="row" ng-repeat="cause in indexCtrl.causes">
   <div class="col-sm-3">
     <div class="well">
-     <h4>World Peace{{1+1}}</h4>
+     <h4>{{cause.title}}</h4>
     </div>
   </div>
   <div class="col-sm-9">
     <div class="well">
-      <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+      <p>{{cause.body}}</p>
     </div>
   </div>
 </div>
