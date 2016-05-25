@@ -17,7 +17,6 @@ function CauseViewController($stateParams, $http){
 				"Authorization": "Bearer " + token
 			} 
 		}).then(function(response){
-				console.log(response.data);
 				self.currentCause = response.data;
 			});
 	}
