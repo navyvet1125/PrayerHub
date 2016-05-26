@@ -22,6 +22,7 @@ function CausesController ($stateParams, $state, $http){
 	self.newCause.unitOfTime='weeks';
 	self.numberOfUnits = [1,2,3,4,5,6];
 	self.newCause.numberOfUnits = 3;
+	self.deleteCause = deleteCause;
 
 	function submitCause(main){
 		var submittedCause;
@@ -104,7 +105,7 @@ function CausesController ($stateParams, $state, $http){
 		if(confirm('Are you sure you want to delete this cause?')){
 			$http({
 				method: 'DELETE',
-				url: '/causes/'+ self.currentCause._id,
+				url: '/causes/'+ cause._id,
 				headers:{
 					"Authorization": "Bearer " + self.token
 				},
@@ -112,7 +113,7 @@ function CausesController ($stateParams, $state, $http){
 				if(response.status===200){
 					$http({
 						method: 'GET',
-						url: '/users/'+self.currentCause.creator,
+						url: '/users/'+cause.creator,
 						headers:{
 							"Authorization": "Bearer " + self.token
 						},
@@ -129,7 +130,7 @@ function CausesController ($stateParams, $state, $http){
 								if(response.data._id===main.user._id){
 									main.user = response.data;
 								}
-								$state.go('causes');
+								self.displayCauses();
 							}).catch(function(err){
 								console.log(err);
 							});
