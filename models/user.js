@@ -21,11 +21,8 @@ var userSchema = new mongoose.Schema({
 	pledges: {type: Number, default: 0},
 	causes: {type: Number, default: 0},
 	fb_access_token: String,
-	password: String
-
+	bio: String,
 });
-
-userSchema.plugin(require('mongoose-bcrypt'));
 
 //search users by role
 userSchema.statics.findByRole = function(role, cb){

@@ -31,9 +31,9 @@ function configuration($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/causeView.html",
       controller: 'CauseViewController as causeViewCtrl'
     })
-    .state('pledges', {
-      url: "/pledges",
-      templateUrl: "partials/pledges.html",
-      controller: 'PledgesController as pledgesCtrl'
+    .state('users', {
+      url: "/users/:id",
+      templateUrl: "partials/users.html",
+      controller: 'UsersController as usersCtrl'
     });
 }

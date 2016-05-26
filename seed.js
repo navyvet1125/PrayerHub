@@ -14,7 +14,15 @@ User.remove({})
 	})
  	.then(function(){
   		return User.create([
-    		{name:'Evan Washington', email:'enavy04@gmail.com', role:'admin', city:'Inglewood', pledges:2, causes:2 },
+    		{
+                name:'Evan Washington', 
+                email:'enavy04@gmail.com', 
+                role:'admin', 
+                city:'Inglewood', 
+                pledges:2, 
+                causes:2,
+                bio: '     Bacon ipsum dolor amet sausage turducken flank porchetta pork. Chicken prosciutto chuck flank biltong short loin. Fatback tenderloin ribeye short loin prosciutto boudin pancetta corned beef turducken sirloin. Meatball filet mignon swine shoulder, pork belly bresaola brisket sausage kielbasa pork chop venison prosciutto chuck. Tri-tip kielbasa short ribs doner alcatra pastrami pancetta beef. Short loin corned beef pancetta, cupim drumstick kielbasa boudin pork loin swine shankle cow. Porchetta tri-tip pancetta, kielbasa strip steak chicken meatball pork loin brisket bresaola fatback ground round pork chop shank ball tip.' 
+            }
     	]);
   	})
   	.then(function(user){

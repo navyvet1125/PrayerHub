@@ -1,0 +1,28 @@
+<div ng-init="usersCtrl.initialize(appCtrl.user)">
+<h2>{{usersCtrl.profile.name}}</h2>
+<div ng-if="usersCtrl.profile._id === usersCtrl.user._id">
+	<label>Location:</label><input type="text" ng-model="usersCtrl.profile.city"/><br/>
+</div>
+<div ng-if="usersCtrl.profile._id !== usersCtrl.user._id">
+	<h4>{{usersCtrl.profile.city}}</h4>
+</div>
+<img ng-src="{{usersCtrl.profile.avatar}}" alt ="{{usersCtrl.profile.name}}" class="img-circle" height="200" width="200"/>
+<hr>
+<div class="row">
+	<div class="col-sm-4" style="text-align:left;">
+		<h3>Causes:</h3>
+		<ul>
+			<li ng-repeat="cause in usersCtrl.causes"><a ui-sref="causeView({id: cause._id})">{{cause.title}}</a></li>
+		</ul>
+		<h3>Pledges:</h3>
+		<ul>
+			<li ng-repeat="pledge in usersCtrl.pledges"><a ui-sref="causeView({id: pledge.cause})">{{pledge.title}}</a></li>
+		</ul>
+	</div>
+	<div class="col-sm-8">
+		<h3>Bio</h3>
+		<textarea ng-if="usersCtrl.profile._id === usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio"></textarea>
+		<textarea ng-if="usersCtrl.profile._id !== usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio" disabled="true"></textarea>
+	</div>
+</div>
+</div>

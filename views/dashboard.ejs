@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
   <script src="/javascripts/app.js"></script>
@@ -12,6 +13,7 @@
   <script src="/javascripts/indexController.js"></script>
   <script src="/javascripts/causesController.js"></script>
   <script src="/javascripts/causeViewController.js"></script>
+  <script src="/javascripts/usersController.js"></script>
   <script type="text/javascript">
     if(window.location.hash ==='#_=_')window.location ='';
   </script>
@@ -46,7 +48,7 @@
     <div class="row">
       <div class="col-sm-3 well">
         <div class="well">
-          <p><a href="#">My Profile</a></p>
+          <p><a ui-sref="users({id: appCtrl.user._id})">My Profile</a></p>
           <img ng-src="{{appCtrl.user.avatar}}" class="img-circle" height="100" width="100" alt="Avatar">
         </div>
         <div class="well">  
