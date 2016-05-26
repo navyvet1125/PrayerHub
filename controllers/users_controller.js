@@ -33,7 +33,7 @@ controller.create = function(req,res){
 	});
 };
 
-controller.show = function(req,res){
+controller.testshow = function(req,res){
 	//Find and show user if they exist
 	User.findById(req.params.id)
 	.then(function(user){
@@ -46,7 +46,7 @@ controller.show = function(req,res){
 	});
 };
 
-controller.testShow = function(req,res){
+controller.show = function(req,res){
 	//Find and show user if they exist
 	User.findWithId(req.params.id)
 	.then(function(user){

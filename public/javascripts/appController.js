@@ -15,8 +15,10 @@ angular
 
 function AppController ($stateParams, $state, $http){
 	var self = this;
+	self.token = localStorage.getItem('token');
 	self.initialize = initialize;
 	self.displayPledges = displayPledges;
+	self.displayUserInfo = displayUserInfo;
 
 	function initialize(user,token){
 		self.user = user;
@@ -24,15 +26,25 @@ function AppController ($stateParams, $state, $http){
 		self.displayPledges();
 	}
 	function displayPledges(){
-		var token = localStorage.getItem('token');
 		$http({
 		  method: 'GET',
 		  url: '/users/'+self.user._id+'/pledges?limit=3',
 		  headers:{
-				"Authorization": "Bearer " + token
+				"Authorization": "Bearer " + self.token
 			} 
 		}).then(function(response){
 				self.pledges = response.data;
 			});
+	}
+	function displayUserInfo(){
+		$http({
+		  method: 'GET',
+		  url: '/users/'+self.user._id,
+		  headers:{
+				"Authorization": "Bearer " + self.token
+			} 
+		}).then(function(response){
+				self.user = response.data;
+			});	
 	}
 }

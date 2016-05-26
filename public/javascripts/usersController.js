@@ -16,6 +16,7 @@ function UsersController($stateParams, $state, $http){
 
 	function initialize(user){
 		self.user = user;
+		console.log(user);
 		$http({
 		  method: 'GET',
 		  url: '/users/'+ $stateParams.id,

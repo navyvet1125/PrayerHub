@@ -142,25 +142,10 @@ function CauseViewController($state, $stateParams, $http){
 			data: formattedPledge
 
 		}).then(function(response){
-			if(response.status===200){
-				$http({
-					method: 'PUT',
-					url: '/users/'+main.user._id,
-					headers:{
-						"Authorization": "Bearer " + self.token
-					},
-					data: {pledges:main.user.pledges+1}
-				})
-				.then(function(response){
-					//update all layers of the SPA to changes made
-					main.user = response.data;
-					main.displayPledges();
-					self.getPledges();
-				})
-				.catch(function(err){
-					$state.go('error',{error:err.data.message});
-				});
-			}
+			main.displayUserInfo();
+			main.displayPledges();
+			self.getPledges();
+
 		}).catch(function(err){
 			$state.go('error',{error:err});
 		});
@@ -189,27 +174,11 @@ function CauseViewController($state, $stateParams, $http){
 					"Authorization": "Bearer " + self.token
 				},
 			}).then(function(response){
-				if(response.status===200){
-					$http({
-						method: 'PUT',
-						url: '/users/'+main.user._id,
-						headers:{
-							"Authorization": "Bearer " + self.token
-						},
-						data: {pledges:main.user.pledges-1}
-					})
-					.then(function(response){
-						//update all layers of the SPA to changes made
-						main.user = response.data;
-						main.displayPledges();
-						self.getPledges();
-						self.currentUserHasAPledge = false;
-
-					})
-					.catch(function(err){
-						$state.go('error',{error:err});
-					});
-				}
+				//update all layers of the SPA to changes made
+				main.displayPledges();
+				main.displayUserInfo();
+				self.getPledges();
+				self.currentUserHasAPledge = false;
 			}).catch(function(err){
 				$state.go('error',{error:err});
 			});
@@ -228,35 +197,8 @@ function CauseViewController($state, $stateParams, $http){
 					"Authorization": "Bearer " + self.token
 				},
 			}).then(function(response){
-				if(response.status===200){
-					$http({
-						method: 'GET',
-						url: '/users/'+self.currentCause.creator,
-						headers:{
-							"Authorization": "Bearer " + self.token
-						},
-					}).then(function(response){
-						if(response.status===200){
-							$http({
-								method: 'PUT',
-								url: '/users/'+response.data._id,
-								headers:{
-									"Authorization": "Bearer " + self.token
-								},
-								data: {causes:response.data.causes-1}
-							}).then(function(response){
-								if(response.data._id===main.user._id){
-									main.user = response.data;
-								}
-								$state.go('causes');
-							}).catch(function(err){
-								$state.go('error',{error:err});
-							});
-						}
-					}).catch(function(err){
-						$state.go('error',{error:err});
-					});
-				}
+				main.displayUserInfo();
+				$state.go('causes');
 			}).catch(function(err){
 				$state.go('error',{error:err});
 			});

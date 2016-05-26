@@ -56,26 +56,9 @@ function CausesController ($stateParams, $state, $http){
 			data: formattedCause
 
 		}).then(function(response){
-			if(response.status===200){
-				submittedCause = response.data._id;
-				$http({
-					method: 'PUT',
-					url: '/users/'+main.user._id,
-					headers:{
-						"Authorization": "Bearer " + self.token
-					},
-					data: {causes:main.user.causes+1}
-				})
-				.then(function(response){
-					//update all layers of the SPA to changes made
-					main.user = response.data;
-					self.displayCauses();
-					$state.go('causeView',{id: submittedCause});
-				})
-				.catch(function(err){
-					console.log(err.data.message);
-				});
-			}
+			main.displayUserInfo();
+			self.displayCauses();
+			$state.go('causeView',{id: submittedCause});
 		}).catch(function(err){
 			console.log(err);
 		});
@@ -110,35 +93,8 @@ function CausesController ($stateParams, $state, $http){
 					"Authorization": "Bearer " + self.token
 				},
 			}).then(function(response){
-				if(response.status===200){
-					$http({
-						method: 'GET',
-						url: '/users/'+cause.creator,
-						headers:{
-							"Authorization": "Bearer " + self.token
-						},
-					}).then(function(response){
-						if(response.status===200){
-							$http({
-								method: 'PUT',
-								url: '/users/'+response.data._id,
-								headers:{
-									"Authorization": "Bearer " + self.token
-								},
-								data: {causes:response.data.causes-1}
-							}).then(function(response){
-								if(response.data._id===main.user._id){
-									main.user = response.data;
-								}
-								self.displayCauses();
-							}).catch(function(err){
-								$state.go('error',{error:err});
-							});
-						}
-					}).catch(function(err){
-						$state.go('error',{error:err});
-					});
-				}
+				main.displayUserInfo();
+				self.displayCauses();
 			}).catch(function(err){
 				$state.go('error',{error:err});
 			});
