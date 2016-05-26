@@ -14,7 +14,7 @@ angular
 	});
 
 
-function CauseViewController($stateParams, $http){
+function CauseViewController($state, $stateParams, $http){
 	var self = this;
 	self.token = localStorage.getItem('token');
 	self.currentCause = {};
@@ -24,11 +24,22 @@ function CauseViewController($stateParams, $http){
 	self.getTime = getTime;
 	self.submitNewPledge = submitNewPledge;
 	self.newPledge ={};
+	self.currentUserHasAPledge = false;
 	self.newPledge.howLong = 15;
 	self.hours = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 	self.minutes = ['00','15','30','45'];
 	self.howLong = [15,30,45,60,90,120];
 	self.amOrPm = ['AM','PM'];
+	self.initialize = initialize;
+	self.unPledge = unPledge;
+	self.deleteCause = deleteCause;
+
+	function initialize(user){
+		self.user = user;
+		self.getTime();
+		self.getCause();
+
+	}
 
 	//Get cause information
 	function getCause(){
@@ -54,6 +65,12 @@ function CauseViewController($stateParams, $http){
 			} 
 		}).then(function(response){
 				self.pledges = response.data;
+				for(var i = 0; i < self.pledges.length;i++){
+					if (self.pledges[i].user === self.user._id){
+						self.currentUserHasAPledge = true;
+						break;
+					}
+				}
 			});
 
 	}
@@ -75,7 +92,6 @@ function CauseViewController($stateParams, $http){
 
 		} else {
 			if(hour === 12 ){
-				console.log('PM yall!');
 				self.newPledge.amOrPm = 'PM';
 			} else {
 				self.newPledge.amOrPm = 'AM';
@@ -144,7 +160,102 @@ function CauseViewController($stateParams, $http){
 		}).catch(function(err){
 			console.log(err);
 		});
-}
-	self.getTime();
-	self.getCause();
+	}
+
+	function unPledge(main){
+		$http({
+			method: 'GET',
+			url: '/users/'+main.user._id+'/pledges',
+			headers:{
+				"Authorization": "Bearer " + self.token
+			},
+		}).then(function(response){
+			var pledges = response.data;
+			var targetPledge;
+			for (var i =0; i<pledges.length;i++){
+				if (self.pledges[i].cause === self.currentCause._id){
+					targetPledge = self.pledges[i]._id;
+					break;
+				}
+			}
+			$http({
+				method: 'DELETE',
+				url: '/pledges/'+targetPledge,
+				headers:{
+					"Authorization": "Bearer " + self.token
+				},
+			}).then(function(response){
+				if(response.status===200){
+					$http({
+						method: 'PUT',
+						url: '/users/'+main.user._id,
+						headers:{
+							"Authorization": "Bearer " + self.token
+						},
+						data: {pledges:main.user.pledges-1}
+					})
+					.then(function(response){
+						//update all layers of the SPA to changes made
+						main.user = response.data;
+						main.displayPledges();
+						self.getPledges();
+						self.currentUserHasAPledge = false;
+
+					})
+					.catch(function(err){
+						console.log(err.data.message);
+					});
+				}
+			}).catch(function(err){
+				console.log(err);
+			});
+		}).catch(function(err){
+			console.log(err);
+		});
+
+	}
+
+	function deleteCause(main){
+		if(confirm('Are you sure you want to delete this cause?')){
+			$http({
+				method: 'DELETE',
+				url: '/causes/'+ self.currentCause._id,
+				headers:{
+					"Authorization": "Bearer " + self.token
+				},
+			}).then(function(response){
+				if(response.status===200){
+					$http({
+						method: 'GET',
+						url: '/users/'+self.currentCause.creator,
+						headers:{
+							"Authorization": "Bearer " + self.token
+						},
+					}).then(function(response){
+						if(response.status===200){
+							$http({
+								method: 'PUT',
+								url: '/users/'+response.data._id,
+								headers:{
+									"Authorization": "Bearer " + self.token
+								},
+								data: {causes:response.data.causes-1}
+							}).then(function(response){
+								if(response.data._id===main.user._id){
+									main.user = response.data;
+								}
+								$state.go('causes');
+							}).catch(function(err){
+								console.log(err);
+							});
+						}
+					}).catch(function(err){
+						console.log(err);
+					});
+				}
+			}).catch(function(err){
+				console.log(err);
+			});
+		}
+	}
 }

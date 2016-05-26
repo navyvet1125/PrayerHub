@@ -4,6 +4,9 @@
   <div class="row" ng-repeat="cause in causesCtrl.causes">
     <div class="col-sm-3">
       <h4><a ui-sref="causeView({id: cause._id})">{{cause.title}}</a></h4>
+      <a class="btn btn-danger"
+   ng-click="causesCtrl.deleteCause(cause._id, appCtrl)"
+   ng-if="causesCtrl.user.role==='admin' || causesCtrl.currentCause.creator ===causesCtrl.user._id ">Delete Cause</a>
     </div>
     <div class="col-sm-9">
       <p>{{cause.body| preview}}<a ui-sref="causeView({id: cause._id})">more</a></p>

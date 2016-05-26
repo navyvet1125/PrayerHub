@@ -24,6 +24,7 @@ function CausesController ($stateParams, $state, $http){
 	self.newCause.numberOfUnits = 3;
 
 	function submitCause(main){
+		var submittedCause;
 		var formattedDate;
 		if(self.newCause.wontExpire){
 			formattedDate = null;
@@ -44,7 +45,6 @@ function CausesController ($stateParams, $state, $http){
 		delete formattedCause.unitOfTime;
 		delete formattedCause.numberOfUnits;
 		delete formattedCause.wontExpire;
-		console.log(formattedCause);
 
 		$http({
 			method: 'POST',
@@ -56,6 +56,7 @@ function CausesController ($stateParams, $state, $http){
 
 		}).then(function(response){
 			if(response.status===200){
+				submittedCause = response.data._id;
 				$http({
 					method: 'PUT',
 					url: '/users/'+main.user._id,
@@ -68,6 +69,7 @@ function CausesController ($stateParams, $state, $http){
 					//update all layers of the SPA to changes made
 					main.user = response.data;
 					self.displayCauses();
+					$state.go('causeView',{id: submittedCause});
 				})
 				.catch(function(err){
 					console.log(err.data.message);
@@ -97,5 +99,50 @@ function CausesController ($stateParams, $state, $http){
 				self.causes = response.data;
 			});
 	}
+
+	function deleteCause(cause, main){
+		if(confirm('Are you sure you want to delete this cause?')){
+			$http({
+				method: 'DELETE',
+				url: '/causes/'+ self.currentCause._id,
+				headers:{
+					"Authorization": "Bearer " + self.token
+				},
+			}).then(function(response){
+				if(response.status===200){
+					$http({
+						method: 'GET',
+						url: '/users/'+self.currentCause.creator,
+						headers:{
+							"Authorization": "Bearer " + self.token
+						},
+					}).then(function(response){
+						if(response.status===200){
+							$http({
+								method: 'PUT',
+								url: '/users/'+response.data._id,
+								headers:{
+									"Authorization": "Bearer " + self.token
+								},
+								data: {causes:response.data.causes-1}
+							}).then(function(response){
+								if(response.data._id===main.user._id){
+									main.user = response.data;
+								}
+								$state.go('causes');
+							}).catch(function(err){
+								console.log(err);
+							});
+						}
+					}).catch(function(err){
+						console.log(err);
+					});
+				}
+			}).catch(function(err){
+				console.log(err);
+			});
+		}
+	}
+
 	self.displayCauses();
 }

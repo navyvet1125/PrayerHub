@@ -1,29 +1,49 @@
-<h2>{{causeViewCtrl.currentCause.title}}</h2>
-<p>	{{causeViewCtrl.pledges.length| pledges }}</p>
-<hr>
-<h3>Info:</h3>
-<p>
-	{{causeViewCtrl.currentCause.body}}
-</p>
-<h3>Make a pledge</h3>
-<form ng-submit="causeViewCtrl.submitNewPledge(appCtrl)">
+<div ng-init="causeViewCtrl.initialize(appCtrl.user)">
+	<h2>{{causeViewCtrl.currentCause.title}}</h2>
+	<p>	created by: {{causeViewCtrl.currentCause.creatorName }}</p>
+	<p>	{{causeViewCtrl.pledges.length| pledges }}</p>
+	<hr>
+	<h3>Info:</h3>
 	<p>
-	  <label for="date">Date</label>
-	  <input type="date" name="date" ng-model="causeViewCtrl.newPledge.date">
+		{{causeViewCtrl.currentCause.body}}
 	</p>
-	<p>
-	  <label for="hour">Time</label>
-	  <select ng-model="causeViewCtrl.newPledge.hour" ng-options="item for item in causeViewCtrl.hours"></select><span> :</span>
-	  <select ng-model="causeViewCtrl.newPledge.minutes" ng-options="item for item in causeViewCtrl.minutes"></select>
-	  <select ng-model="causeViewCtrl.newPledge.amOrPm" ng-options="item for item in causeViewCtrl.amOrPm"></select>
-	</p>
-	<p>
-	  <label>Duration</label>
-	  <select ng-model="causeViewCtrl.newPledge.howLong" ng-options="item for item in causeViewCtrl.howLong"></select>
-	</p>
-  <div>
-	  <input type="submit" class="btn btn-success btn-lg"/>
-  </div>
-</form>
-
-<a ui-sref="causes">Back</a>
+	<br/>
+	<div ng-if="causeViewCtrl.currentUserHasAPledge">
+		<br/>
+		<br/>
+		<h2>You already have made a pledge to this cause!</h2>
+		<h3>Thank you for your time.  Keep up the good work!</h3>
+		<a class="btn btn-danger" ng-click="causeViewCtrl.unPledge(appCtrl)">Delete Pledge</a>
+	</div>
+	<div ng-if="!causeViewCtrl.currentUserHasAPledge">
+		<h3>Make a pledge</h3>
+		<form ng-submit="causeViewCtrl.submitNewPledge(appCtrl)">
+			<p>
+			  <label for="date">Date</label>
+			  <input type="date" name="date" ng-model="causeViewCtrl.newPledge.date">
+			</p>
+			<p>
+			  <label for="hour">Time</label>
+			  <select ng-model="causeViewCtrl.newPledge.hour" ng-options="item for item in causeViewCtrl.hours"></select><span> :</span>
+			  <select ng-model="causeViewCtrl.newPledge.minutes" ng-options="item for item in causeViewCtrl.minutes"></select>
+			  <select ng-model="causeViewCtrl.newPledge.amOrPm" ng-options="item for item in causeViewCtrl.amOrPm"></select>
+			</p>
+			<p>
+			  <label>Duration</label>
+			  <select ng-model="causeViewCtrl.newPledge.howLong" ng-options="item for item in causeViewCtrl.howLong"></select>
+			</p>
+		  <div>
+			  <input type="submit" class="btn btn-success btn-lg"/>
+		  </div>
+		</form>
+	</div>
+	<hr>
+	<!-- Make sure only admin or the creator of a cause can delete it -->
+	<a class="btn btn-danger"
+	 ng-click="causeViewCtrl.deleteCause(appCtrl)"
+	 ng-if="causeViewCtrl.user.role==='admin' || causeViewCtrl.currentCause.creator ===causeViewCtrl.user._id ">Delete Cause</a>
+	<ul class="list-inline">
+		<li><a ui-sref="causes">Causes</a></li>
+		<li><a ui-sref="home">Home</a></li>
+	</ul>
+</div>
