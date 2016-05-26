@@ -12,6 +12,8 @@ router.route('/:id')
 	.get(tokens.verify, usersController.show)
 	.put(tokens.verify, usersController.update)
 	.delete(tokens.verify, usersController.delete);
+router.route('/:id/test')
+	.get(tokens.verify, usersController.testShow)
 
 /*Show all pledges of a user */ 
 router.route('/:id/pledges')

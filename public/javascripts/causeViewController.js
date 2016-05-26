@@ -52,7 +52,9 @@ function CauseViewController($state, $stateParams, $http){
 		}).then(function(response){
 				self.currentCause = response.data;
 				self.getPledges();
-			});
+		}).catch(function(err){
+			$state.go('error',{error:err.data.message});
+		});
 	}
 
 	//Get all the pledges for a specific cause
@@ -71,7 +73,9 @@ function CauseViewController($state, $stateParams, $http){
 						break;
 					}
 				}
-			});
+		}).catch(function(err){
+			$state.go('error',{error:err.data.message});
+		});
 
 	}
 
@@ -154,11 +158,11 @@ function CauseViewController($state, $stateParams, $http){
 					self.getPledges();
 				})
 				.catch(function(err){
-					console.log(err.data.message);
+					$state.go('error',{error:err.data.message});
 				});
 			}
 		}).catch(function(err){
-			console.log(err);
+			$state.go('error',{error:err});
 		});
 	}
 
@@ -203,14 +207,14 @@ function CauseViewController($state, $stateParams, $http){
 
 					})
 					.catch(function(err){
-						console.log(err.data.message);
+						$state.go('error',{error:err});
 					});
 				}
 			}).catch(function(err){
-				console.log(err);
+				$state.go('error',{error:err});
 			});
 		}).catch(function(err){
-			console.log(err);
+			$state.go('error',{error:err});
 		});
 
 	}
@@ -246,15 +250,15 @@ function CauseViewController($state, $stateParams, $http){
 								}
 								$state.go('causes');
 							}).catch(function(err){
-								console.log(err);
+								$state.go('error',{error:err});
 							});
 						}
 					}).catch(function(err){
-						console.log(err);
+						$state.go('error',{error:err});
 					});
 				}
 			}).catch(function(err){
-				console.log(err);
+				$state.go('error',{error:err});
 			});
 		}
 	}

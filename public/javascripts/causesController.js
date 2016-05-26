@@ -132,15 +132,15 @@ function CausesController ($stateParams, $state, $http){
 								}
 								self.displayCauses();
 							}).catch(function(err){
-								console.log(err);
+								$state.go('error',{error:err});
 							});
 						}
 					}).catch(function(err){
-						console.log(err);
+						$state.go('error',{error:err});
 					});
 				}
 			}).catch(function(err){
-				console.log(err);
+				$state.go('error',{error:err});
 			});
 		}
 	}

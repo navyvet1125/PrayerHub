@@ -31,6 +31,11 @@ function configuration($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/causeView.html",
       controller: 'CauseViewController as causeViewCtrl'
     })
+    .state('error', {
+      url: "/error/:error",
+      templateUrl: "partials/error.html",
+      controller: 'ErrorController as errorCtrl'
+    })
     .state('users', {
       url: "/users/:id",
       templateUrl: "partials/users.html",

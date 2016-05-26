@@ -46,6 +46,19 @@ controller.show = function(req,res){
 	});
 };
 
+controller.testShow = function(req,res){
+	//Find and show user if they exist
+	User.findWithId(req.params.id)
+	.then(function(user){
+		if(user)res.status(200).send(user);
+		else res.status(404).send({status: 404, message:'User not found!'});
+	})
+	.catch(function(err){
+		//error handling
+		res.status(500).send(err);
+	});
+};
+
 controller.update = function(req,res){
 	//Find and update a user
 	User.findById(req.params.id)

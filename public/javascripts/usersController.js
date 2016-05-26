@@ -26,7 +26,9 @@ function UsersController($stateParams, $state, $http){
 				self.profile = response.data;
 				self.displayCauses();
 				self.displayPledges();
-			});
+		}).catch(function(err){
+			$state.go('error',{error:err});
+		});
 
 	}
 
@@ -75,7 +77,7 @@ function UsersController($stateParams, $state, $http){
 
 		})
 		.catch(function(err){
-			console.log(err.data.message);
+			$state.go('error',{error:err});
 		});
 	}
 

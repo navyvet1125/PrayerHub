@@ -32,6 +32,23 @@ userSchema.statics.findByEmail = function(email, cb){
 	return this.findOne({email: email}, cb);
 };
 
+userSchema.statics.findWithId = function(id, cb){
+	var currentPledges;
+	var currentUser;
+	return this.findById(id)
+			.then(function(user){
+				currentUser = user;
+				return Pledge.find({user: id});
+			}).then(function(pledges){
+				currentPledges = pledges;
+				return Cause.find({creator: id});
+			}).then(function(causes){
+				currentUser.pledges = currentPledges.length;
+				currentUser.causes = causes.length;
+				return currentUser.save();
+			}).then(cb);
+};
+
 
 userSchema.statics.findPledgesById = function(id, cb){
 	return Pledge.find({user: id}, cb);

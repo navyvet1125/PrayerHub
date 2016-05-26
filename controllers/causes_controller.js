@@ -1,4 +1,6 @@
+var User = require('../models/user');
 var Cause = require('../models/cause');
+var Pledge = require('../models/pledge');
 var controller ={};
 
 controller.index= function(req, res, next) {
@@ -83,11 +85,23 @@ controller.delete = function(req,res){
 	Cause.findByIdAndRemove(req.params.id)
 	.then(function(cause){
 		//status update based on whether or not the cause exists
-		if(cause)res.status(200).send({status: 200, message:'Cause Successfully Deleted!'});
+		if(cause){
+			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', cause.id);
+			Pledge.find({ cause:cause.id }).remove().exec()
+			.then(function(pledges){
+				console.log(pledges);
+				res.status(200).send({status: 200, message:'Cause Successfully Deleted!'});
+			}).catch(function(err){
+				//error handling
+				console.log(err);
+				res.status(500).send(err);
+			});
+		}
 		else res.status(404).send({status: 404, message:'Cause not found!'});
 	})
 	.catch(function(err){
 		//error handling
+		console.log(err);
 		res.status(500).send(err);
 	});
 
