@@ -11,7 +11,7 @@
   </div>
   <h3>New Cause</h3>
   <hr>
-  <form ng-submit="causesCtrl.action(appCtrl)" ng-if="causesCtrl.user.role !=='new User' ">
+  <form ng-submit="causesCtrl.submitCause(appCtrl)" ng-if="causesCtrl.user.role !=='new User' ">
     <p>
       <label for="title">Title</label>
       <input type="text" name="title" ng-model="causesCtrl.newCause.title" placeholder="Title">
@@ -21,16 +21,26 @@
       <select ng-model="causesCtrl.newCause.category" ng-options="item for item in causesCtrl.categories"></select>
     </p>
     <p>
+      <label>Expires in </label>
+      <div ng-if="!causesCtrl.newCause.wontExpire">
+        <select ng-model="causesCtrl.newCause.numberOfUnits" ng-options="item for item in causesCtrl.numberOfUnits"></select>
+        <select ng-model="causesCtrl.newCause.unitOfTime" ng-options="item for item in causesCtrl.unitOfTime"></select>
+      </div>
+      <label>Doesn't expire</label><input type="checkbox" ng-model="causesCtrl.newCause.wontExpire">
+    </p>
+    <p>
       <p>Enter a description of the cause of up to 500 characters in length.</p>
       <label>Body</label>
       <textarea name="body" ng-model="causesCtrl.newCause.body" placeholder="Body... Max limit 500 characters" rows="10" class="form-control" style="min-width: 100%" maxlength="500"></textarea>
+    </p>
+    <p>
       <input class="btn btn-success btn-lg" type="submit"/>
     </p>
   </form>
   <div  ng-if="causesCtrl.user.role ==='new User' ">
     <h4>You need more to make more pledges before you can create new causes</h4>
     <p>
-      <a ui-sref="pledges" class="btn btn-success">Make a pledge!</a>
+      <h1 class="jumbotron">Make a pledge!</h1>
     </p>
   </div>
 </div>

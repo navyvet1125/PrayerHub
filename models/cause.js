@@ -5,6 +5,7 @@ var Pledge = require('./pledge');
 var causeSchema = new mongoose.Schema({
 	title: String,
 	body: String,
+	creatorName: String,
 	creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	category: String,
 	createdAt: Date,

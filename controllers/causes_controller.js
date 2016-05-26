@@ -27,6 +27,7 @@ controller.create = function(req,res){
 	//creates a new cause
 	var newCause = new Cause();
 	newCause.creator = req.body.creator;
+	newCause.creatorName = req.body.creatorName;
 	newCause.title = req.body.title;
 	newCause.body = req.body.body;
 	newCause.category =req.body.category;
