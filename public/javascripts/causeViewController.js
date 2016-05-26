@@ -140,10 +140,11 @@ function CauseViewController($stateParams, $http){
 				.catch(function(err){
 					console.log(err.data.message);
 				});
-			}		});
-
-
-	}
+			}
+		}).catch(function(err){
+			console.log(err);
+		});
+}
 	self.getTime();
 	self.getCause();
 }

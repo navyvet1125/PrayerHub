@@ -50,7 +50,24 @@ function CausesController ($stateParams, $state, $http){
 			data: formattedCause
 
 		}).then(function(response){
-			console.log(response);
+			if(response.status===200){
+				$http({
+					method: 'PUT',
+					url: '/users/'+main.user._id,
+					headers:{
+						"Authorization": "Bearer " + self.token
+					},
+					data: {causes:main.user.causes+1}
+				})
+				.then(function(response){
+					//update all layers of the SPA to changes made
+					main.user = response.data;
+					self.displayCauses();
+				})
+				.catch(function(err){
+					console.log(err.data.message);
+				});
+			}
 		}).catch(function(err){
 			console.log(err);
 		});
