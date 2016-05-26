@@ -12,7 +12,7 @@ function configuration($stateProvider, $urlRouterProvider) {
   // Now set up the states
   $stateProvider
     .state('index', {
-      url: "/_=_",
+      url: "/home",
       templateUrl: "partials/index.html",
       controller: 'IndexController as indexCtrl', 
     })

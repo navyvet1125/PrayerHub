@@ -4,11 +4,14 @@
   <div class="col-sm-3">
     <div class="well">
      <h4>{{cause.title}}</h4>
+     by <h4>{{cause.creatorName}}</h4>
     </div>
   </div>
   <div class="col-sm-9">
+    <a style="text-decoration:none;" ui-sref="causeView({id: cause._id})">
     <div class="well">
       <p>{{cause.body}}</p>
     </div>
+    </a>
   </div>
 </div>

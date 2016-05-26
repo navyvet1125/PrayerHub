@@ -1,6 +1,11 @@
 angular
 	.module('prayerHubApp')
-	.controller('CausesController', CausesController);
+	.controller('CausesController', CausesController)
+	.filter('preview',function(){
+	  	return function(input){
+	  		return input.substr(0,50) + '...';
+	  	};
+  });
 
 function CausesController ($stateParams, $state, $http){
 	var self = this;
