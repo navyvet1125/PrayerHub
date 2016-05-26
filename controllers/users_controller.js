@@ -57,6 +57,8 @@ controller.update = function(req,res){
 		if(req.body.password) user.password = req.body.password;
 		if(req.body.pledges) user.pledges = req.body.pledges;
 		if(req.body.causes) user.causes = req.body.causes;
+		if(req.body.city) user.city = req.body.city;
+		if(req.body.bio) user.bio = req.body.bio;
 		if(user.pledges >= 5 && user.role === 'new User') user.role ='contributor';
 		return user.save();
 	})

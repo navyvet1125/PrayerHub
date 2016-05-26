@@ -5,13 +5,14 @@ angular
 function UsersController($stateParams, $state, $http){
 	var self = this;
 	self.profile={};
+	self.profileChange = false;
 	self.token = localStorage.getItem('token');
 	self.initialize = initialize;
 	self.displayCauses = displayCauses;
 	self.causes = [];
 	self.displayPledges = displayPledges;
 	self.pledges = [];
-
+	self.updateInfo = updateInfo;
 
 	function initialize(user){
 		self.user = user;
@@ -53,6 +54,29 @@ function UsersController($stateParams, $state, $http){
 				self.causes = response.data;
 				
 			});
+	}
+
+	function updateInfo(){
+		$http({
+			method: 'PUT',
+			url: '/users/'+ self.profile._id,
+			headers:{
+				"Authorization": "Bearer " + self.token
+			},
+			data: {
+				city:self.profile.city,
+				bio:self.profile.bio
+			}
+		})
+		.then(function(response){
+			self.profile = response.data;
+			self.profileChange = false;
+			console.log(response);
+
+		})
+		.catch(function(err){
+			console.log(err.data.message);
+		});
 	}
 
 

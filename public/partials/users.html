@@ -1,7 +1,9 @@
 <div ng-init="usersCtrl.initialize(appCtrl.user)">
 <h2>{{usersCtrl.profile.name}}</h2>
 <div ng-if="usersCtrl.profile._id === usersCtrl.user._id">
-	<label>Location:</label><input type="text" ng-model="usersCtrl.profile.city"/><br/>
+	<label>Location:</label><input type="text" ng-model="usersCtrl.profile.city" ng-change="usersCtrl.profileChange= true"/>
+	<button ng-if="usersCtrl.profileChange" class="btn btn-warning" ng-click="usersCtrl.updateInfo()">Update</button>
+
 </div>
 <div ng-if="usersCtrl.profile._id !== usersCtrl.user._id">
 	<h4>{{usersCtrl.profile.city}}</h4>
@@ -21,8 +23,10 @@
 	</div>
 	<div class="col-sm-8">
 		<h3>Bio</h3>
-		<textarea ng-if="usersCtrl.profile._id === usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio"></textarea>
-		<textarea ng-if="usersCtrl.profile._id !== usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio" disabled="true"></textarea>
+		<textarea ng-if="usersCtrl.profile._id !== usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio" readonly="true"></textarea>
+		
+		<textarea ng-if="usersCtrl.profile._id === usersCtrl.user._id" class="form-control" rows="10" ng-model="usersCtrl.profile.bio" ng-change="usersCtrl.profileChange = true"/></textarea>
 	</div>
+		<button ng-if="usersCtrl.profileChange" class="btn btn-warning" ng-click="usersCtrl.updateInfo()">Update</button>
 </div>
 </div>
