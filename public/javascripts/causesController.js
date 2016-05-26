@@ -58,7 +58,7 @@ function CausesController ($stateParams, $state, $http){
 		}).then(function(response){
 			main.displayUserInfo();
 			self.displayCauses();
-			$state.go('causeView',{id: submittedCause});
+			$state.go('causeView',{id: response.data._id});
 		}).catch(function(err){
 			console.log(err);
 		});
