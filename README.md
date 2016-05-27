@@ -30,6 +30,14 @@ The purpose of Prayer Hub is to connect people for the purposes of being a bless
 + Run npm install
 + Start your server
 
+##Next Steps
++ Cronjobs functionality
++ Nodemailer functionality
++ Add other ways to connect with people (e.g. a forum and a blog)
++ Advertise on Facebook and in magazines
+
+
+
 ##ERD
 <img src="images/ERD.jpg" width="500"/>
 
