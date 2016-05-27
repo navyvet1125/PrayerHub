@@ -29,16 +29,21 @@ textarea{
 
 .landing-page {
 	margin: 5vh 5vw;
-	text-align:right;
+	text-align:center;
 }
 
 .landing-title{
-	font-size: 300%;
+	color: #118;
 	text-align:center;
-	padding: 8vh 0;
+	padding-bottom:10vh;
 }
-.landing-sub-title, .landing-login-title, .landing-btn{
-	text-align:right;
+
+.landing-title h1{
+	font-size: 500%;
+}
+
+.landing-title h4{
+	font-size: 200%;
 }
 
 .list-inline{
