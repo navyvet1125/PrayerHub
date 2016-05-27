@@ -28,78 +28,79 @@
   </style>
 </head>
 <body ng-controller="AppController as appCtrl" ng-init="appCtrl.initialize(<%= JSON.stringify(user) %>, <%= JSON.stringify(token) %> )">
-  <input type="hidden" id="jwts" ng-model="appCtrl.token" value="<%= token %>"/>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="home" >Prayer Hub</a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <a ui-sref="home" class="btn btn-info"> Home</a>
-          <a ui-sref="users({id: appCtrl.user._id})" class="btn btn-success"> Profile</a>
-          <a ui-sref="causes" class="btn btn-primary"> Causes</a>
-          <a href="/logout" class="btn btn-danger"> Sign Out</a>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a ui-sref="home">Home</a></li>
-          <li><a ui-sref="causes">Causes</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="/logout"> Sign Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-    
-  <div class="container text-center">    
-    <div class="row">
-      <div class="col-sm-3 well hidden-xs">
-        <div class="well">
-          <p><a ui-sref="users({id: appCtrl.user._id})">My Profile</a></p>
-          <img ng-src="{{appCtrl.user.avatar}}" class="img-circle" height="100" width="100" alt="Avatar">
+  <div class="container-div">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" ui-sref="home" >Prayer Hub</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <a ui-sref="home" class="btn btn-info"> Home</a>
+            <a ui-sref="users({id: appCtrl.user._id})" class="btn btn-success"> Profile</a>
+            <a ui-sref="causes" class="btn btn-primary"> Causes</a>
+            <a href="/logout" class="btn btn-danger"> Sign Out</a>
+          </button>
         </div>
-        <div class="well">  
-          <big>Stats</big>
-          <hr>
-          <p>Pledges made: {{appCtrl.user.pledges}}</p>
-          <p>User Status: {{appCtrl.user.role}} </p>
-          <p>Causes created: {{appCtrl.user.causes}}</p>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="causes">Causes</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="/logout"> Sign Out</a></li>
+          </ul>
         </div>
-        <p><a href="#">About</a></p>
-        <p><a ui-sref="causes">Causes</a></p>
-        <p><a href="/logout">Sign Out</a></p>
       </div>
-      <div class="col-sm-7">
-        <div class="row">
-          <div class="col-sm-12">
-            <h1>Prayer Hub</h1>
-            <h4>Reconnecting the world to the divine</h4>
+    </nav>
+      
+    <div class="container text-center">    
+      <div class="row">
+        <div class="col-sm-3 well hidden-xs">
+          <div class="well">
+            <p><a ui-sref="users({id: appCtrl.user._id})">My Profile</a></p>
+            <img ng-src="{{appCtrl.user.avatar}}" class="img-circle" height="100" width="100" alt="Avatar">
           </div>
+          <div class="well">  
+            <big>Stats</big>
+            <hr>
+            <p>Pledges made: {{appCtrl.user.pledges}}</p>
+            <p>User Status: {{appCtrl.user.role}} </p>
+            <p>Causes created: {{appCtrl.user.causes}}</p>
+          </div>
+          <p><a href="#">About</a></p>
+          <p><a ui-sref="causes">Causes</a></p>
+          <p><a href="/logout">Sign Out</a></p>
         </div>
+        <div class="col-sm-7">
+          <div class="row">
+            <div class="col-sm-12">
+              <h1>Prayer Hub</h1>
+              <h4>Reconnecting the world to the divine</h4>
+            </div>
+          </div>
 
 
 
-        <div ui-view onload="indexCtrl.initialize(<%= JSON.stringify(user) %>)"></div>
-     
+          <div ui-view onload="indexCtrl.initialize(<%= JSON.stringify(user) %>)"></div>
+       
 
 
 
-      </div>
-      <div class="col-sm-2 well hidden-xs">
-        <h3>Upcoming Pledges</h3>
-        <div class="well" ng-repeat="pledge in appCtrl.pledges">
-          <p>Upcoming Pledge:</p>
-          <p><strong>{{pledge.title}}</strong></p>
-          <p>Date: {{pledge.pledgeAt| date: "MMMM dd, yyyy"}}</p>
-          <p>Time: {{pledge.pledgeAt| date: "hh:mm a"}}</p>
-          <p>Duration: {{pledge.howLong| duration}}</p>
-        </div>      
-        <a ui-sref='pledges'>more...</a>
+        </div>
+        <div class="col-sm-2 well hidden-xs">
+          <h3>Upcoming Pledges</h3>
+          <div class="well" ng-repeat="pledge in appCtrl.pledges">
+            <p>Upcoming Pledge:</p>
+            <p><strong>{{pledge.title}}</strong></p>
+            <p>Date: {{pledge.pledgeAt| date: "MMMM dd, yyyy"}}</p>
+            <p>Time: {{pledge.pledgeAt| date: "hh:mm a"}}</p>
+            <p>Duration: {{pledge.howLong| duration}}</p>
+          </div>      
+          <a ui-sref='pledges'>more...</a>
+        </div>
       </div>
     </div>
+    <footer class="container-fluid text-center">
+      <p>Prayer HubⒸ 2016</p>
+    </footer>
   </div>
-  <footer class="container-fluid text-center">
-    <p>Prayer HubⒸ 2016</p>
-  </footer>
 </body>
 </html>

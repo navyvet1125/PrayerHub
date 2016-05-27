@@ -15,7 +15,6 @@ angular
 
 function AppController ($stateParams, $state, $http){
 	var self = this;
-	self.token = localStorage.getItem('token');
 	self.initialize = initialize;
 	self.displayPledges = displayPledges;
 	self.displayUserInfo = displayUserInfo;
@@ -23,6 +22,7 @@ function AppController ($stateParams, $state, $http){
 	function initialize(user,token){
 		self.user = user;
 		localStorage.setItem('token',token);
+		self.token = token;
 		self.displayPledges();
 	}
 	function displayPledges(){
