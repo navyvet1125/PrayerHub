@@ -44,7 +44,9 @@ function AppController ($stateParams, $state, $http){
 				"Authorization": "Bearer " + self.token
 			} 
 		}).then(function(response){
-				self.user = response.data;
-			});	
+			self.user = response.data;
+		}).catch(function(err){
+			$state.go('error',{error:err});			
+		});
 	}
 }

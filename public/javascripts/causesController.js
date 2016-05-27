@@ -60,7 +60,7 @@ function CausesController ($stateParams, $state, $http){
 			self.displayCauses();
 			$state.go('causeView',{id: response.data._id});
 		}).catch(function(err){
-			console.log(err);
+			$state.go('error',{error:err});
 		});
 	}
 

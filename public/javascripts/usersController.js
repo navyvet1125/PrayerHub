@@ -16,7 +16,6 @@ function UsersController($stateParams, $state, $http){
 
 	function initialize(user){
 		self.user = user;
-		console.log(user);
 		$http({
 		  method: 'GET',
 		  url: '/users/'+ $stateParams.id,
@@ -54,9 +53,11 @@ function UsersController($stateParams, $state, $http){
 				"Authorization": "Bearer " + self.token
 			} 
 		}).then(function(response){
-				self.causes = response.data;
+			self.causes = response.data;
 				
-			});
+		}).catch(function(err){
+			$state.go('error',{error:err});
+		});
 	}
 
 	function updateInfo(){
@@ -74,11 +75,10 @@ function UsersController($stateParams, $state, $http){
 		.then(function(response){
 			self.profile = response.data;
 			self.profileChange = false;
-			console.log(response);
 
 		})
 		.catch(function(err){
-			$state.go('error',{error:err});
+			$state.go('error',{error:err.data.message});
 		});
 	}
 
