@@ -1,6 +1,14 @@
 angular
 	.module('prayerHubApp')
-	.controller('IndexController', IndexController);
+	.controller('IndexController', IndexController)
+	.filter('shortName',function(){
+	  	return function(input){
+	  		var output = input.split(' ');
+	  		return output[0]+' '+output[1][0]+'.';
+	  		
+	  	};
+  });
+
 
 function IndexController ($stateParams, $state, $http){
 	var self = this;

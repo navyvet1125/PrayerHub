@@ -44,7 +44,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a ui-sref="home">Home</a></li>
             <li><a ui-sref="causes">Causes</a></li>
-            <li><a href="#">About</a></li>
+            <li><a ui-sref="about">About</a></li>
             <li><a href="/logout"> Sign Out</a></li>
           </ul>
         </div>
@@ -55,7 +55,7 @@
       <div class="row">
         <div class="col-sm-3 well hidden-xs">
           <div class="well">
-            <p><a ui-sref="users({id: appCtrl.user._id})">My Profile</a></p>
+            <p><a ui-sref="users({id: appCtrl.user._id})">{{appCtrl.user.name}}</a></p>
             <img ng-src="{{appCtrl.user.avatar}}" class="img-circle" height="100" width="100" alt="Avatar">
           </div>
           <div class="well">  
@@ -65,7 +65,7 @@
             <p>User Status: {{appCtrl.user.role}} </p>
             <p>Causes created: {{appCtrl.user.causes}}</p>
           </div>
-          <p><a href="#">About</a></p>
+          <p><a ui-sref="about">About</a></p>
           <p><a ui-sref="causes">Causes</a></p>
           <p><a href="/logout">Sign Out</a></p>
         </div>
@@ -77,12 +77,9 @@
             </div>
           </div>
 
-
-
+          <!-- Main view rendered here -->
           <div ui-view onload="indexCtrl.initialize(<%= JSON.stringify(user) %>)"></div>
-       
-
-
+          <!-- End main view render -->
 
         </div>
         <div class="col-sm-2 well hidden-md hidden-sm hidden-xs hidden-lg">

@@ -36,6 +36,10 @@ function configuration($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/error.html",
       controller: 'ErrorController as errorCtrl'
     })
+    .state('about', {
+      url: "/about",
+      templateUrl: "partials/about.html",
+    })
     .state('users', {
       url: "/users/:id",
       templateUrl: "partials/users.html",

@@ -2,6 +2,11 @@
 	<h2>{{causeViewCtrl.currentCause.title}}</h2>
 	<p>	created by: {{causeViewCtrl.currentCause.creatorName }}</p>
 	<p>	{{causeViewCtrl.pledges.length| pledges }}</p>
+	<!-- Make sure only admin or the creator of a cause can delete it -->
+	<a class="btn btn-danger"
+	 ng-click="causeViewCtrl.deleteCause(appCtrl)"
+	 ng-if="causeViewCtrl.user.role==='admin' || causeViewCtrl.currentCause.creator ===causeViewCtrl.user._id ">Delete Cause</a>
+
 	<hr>
 	<h3>Info:</h3>
 	<p>
@@ -38,12 +43,9 @@
 		</form>
 	</div>
 	<hr>
-	<!-- Make sure only admin or the creator of a cause can delete it -->
-	<a class="btn btn-danger"
-	 ng-click="causeViewCtrl.deleteCause(appCtrl)"
-	 ng-if="causeViewCtrl.user.role==='admin' || causeViewCtrl.currentCause.creator ===causeViewCtrl.user._id ">Delete Cause</a>
+
 	<ul class="list-inline">
-		<li><a ui-sref="causes">Causes</a></li>
-		<li><a ui-sref="home">Home</a></li>
+		<li><a ui-sref="causes" class=" btn btn-info">Causes</a></li>
+		<li><a ui-sref="home" class=" btn btn-info">Home</a></li>
 	</ul>
 </div>

@@ -3,8 +3,9 @@
 <div class="row" ng-repeat="cause in indexCtrl.causes">
   <div class="col-sm-3">
     <div class="well">
-     <h4>{{cause.title}}</h4>
-     by <h4>{{cause.creatorName}}</h4>
+     <h4><a ui-sref="causeView({id: cause._id})">{{cause.title}}</a></h4>
+     by<br/>
+     <a ui-sref="users({id: cause.creator})">{{cause.creatorName | shortName}}</a>
     </div>
   </div>
   <div class="col-sm-9">

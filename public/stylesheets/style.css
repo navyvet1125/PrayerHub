@@ -40,3 +40,7 @@ textarea{
 .landing-sub-title, .landing-login-title, .landing-btn{
 	text-align:right;
 }
+
+.list-inline{
+	margin-top: 5vh;
+}
