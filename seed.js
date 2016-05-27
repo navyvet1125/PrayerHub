@@ -21,16 +21,46 @@ User.remove({})
                 city:'Inglewood', 
                 pledges:2, 
                 causes:2,
-                bio: '     Bacon ipsum dolor amet sausage turducken flank porchetta pork. Chicken prosciutto chuck flank biltong short loin. Fatback tenderloin ribeye short loin prosciutto boudin pancetta corned beef turducken sirloin. Meatball filet mignon swine shoulder, pork belly bresaola brisket sausage kielbasa pork chop venison prosciutto chuck. Tri-tip kielbasa short ribs doner alcatra pastrami pancetta beef. Short loin corned beef pancetta, cupim drumstick kielbasa boudin pork loin swine shankle cow. Porchetta tri-tip pancetta, kielbasa strip steak chicken meatball pork loin brisket bresaola fatback ground round pork chop shank ball tip.' 
+                bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel commodo magna. Mauris sodales turpis orci, sed luctus elit consectetur ac. Morbi maximus pellentesque augue vel pharetra. In vel ligula eu nibh vulputate eleifend eu quis sapien. Donec ac vestibulum nisl. Ut aliquet at elit et venenatis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus metus felis, fringilla vel diam id, rutrum interdum nisi. Quisque ullamcorper, leo et egestas hend' 
             }
     	]);
   	})
   	.then(function(user){
   		seedUser = user[0];
     	return Cause.create([
+            {
+                title:'World Peace',
+                body:'World peace or peace on Earth is an ideal state of freedom, peace, and happiness among and within all nations and peoples. This ideal of world non-violence provides a basis for peoples and nations to willingly cooperate, either voluntarily or by virtue of a system of governance that prevents warfare.  Taken from the wikipedia article on World Peace',
+                creator: user[0]._id,
+                creatorName: user[0].name,
+                category: 'General',
+                createdAt: new Date(),
+                expiration: null,
+                approved: true
+            },
+            {
+                title:'Bacon Ipsum',
+                body:'Bacon ipsum dolor amet sausage turducken flank porchetta pork. Chicken prosciutto chuck flank biltong short loin. Fatback tenderloin ribeye short loin prosciutto boudin pancetta corned beef turducken sirloin. Meatball filet mignon swine shoulder, pork belly bresaola brisket sausage kielbasa pork chop venison prosciutto chuck. Tri-tip kielbasa short ribs doner alcatra pastrami pancetta beef. Short loin corned beef pancetta, cupim drumstick kielbasa boudin pork loin swine shankle cow. Porchetta tr',
+                creator: user[0]._id,
+                creatorName: user[0].name,
+                category: 'General',
+                createdAt: new Date(),
+                expiration: null,
+                approved: true
+            },
+            {
+                title:'Cupcake Ipsum',
+                body:'Cupcake ipsum dolor sit amet dragée. Candy icing wafer biscuit muffin lollipop tiramisu. Sweet apple pie jelly. Powder lemon drops liquorice I love I love chocolate bar I love. Chocolate cake icing chupa chups chocolate cake. Croissant chocolate ice cream I love gummies oat cake. Marzipan candy I love I love tiramisu marshmallow sugar plum wafer croissant. Pastry powder liquorice cake marshmallow gummi bears jelly-o. I love marshmallow lemon drops tiramisu carrot cake croissant. Sweet pastry cho',
+                creator: user[0]._id,
+                creatorName: user[0].name,
+                category: 'General',
+                createdAt: new Date(),
+                expiration: null,
+                approved: true
+            },
     		{
-    			title:'World Peace',
-    			body:'World peace or peace on Earth is an ideal state of freedom, peace, and happiness among and within all nations and peoples. This ideal of world non-violence provides a basis for peoples and nations to willingly cooperate, either voluntarily or by virtue of a system of governance that prevents warfare.  Taken from the wikipedia article on World Peace',
+    			title:'Lorem Ipsum',
+    			body:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel commodo magna. Mauris sodales turpis orci, sed luctus elit consectetur ac. Morbi maximus pellentesque augue vel pharetra. In vel ligula eu nibh vulputate eleifend eu quis sapien. Donec ac vestibulum nisl. Ut aliquet at elit et venenatis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus metus felis, fringilla vel diam id, rutrum interdum nisi. Quisque ullamcorper, leo et egestas hend',
     			creator: user[0]._id,
                 creatorName: user[0].name,
     			category: 'General',
@@ -38,9 +68,9 @@ User.remove({})
     			expiration: null,
     			approved: true
     		},
-                    {
-                title:'Healing for Earth',
-                body:'Healing the Earth, our Mother, is something that is more urgent than ever and, hopefully, it is not too late. It is, however, very much true that by healing Mother Earth we will also be healing ourselves and society. No society that is in constant combat with the natural world can every be a happy one and it will be one that, in the end, loses, and more than just the battle. excerpt from "When we heal the Earth, we heal ourselves", by Michael Smith (Veshengro)',
+            {
+                title:'Veggie Ipsum',
+                body:'Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic. Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale.',
                 creator: user[0]._id,
                 creatorName: user[0].name,
                 category: 'General',
