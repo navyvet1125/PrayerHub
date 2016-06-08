@@ -8,15 +8,6 @@ The purpose of Prayer Hub is to connect people for the purposes of being a bless
 
 ##Technologies Used
 + MEAN Stack 
-+ + Mongoose
-+ + Express Generator
-+ + + express-session
-+ + + body-parser
-+ + + ejs
-+ + + cookie-parser
-+ + + morgan
-+ + AngularJs
-+ + NodeJs
 + JWTS
 + OAUTH2 (Via Passport and Passport Facebook)
 + Twitter Bootstrap (CSS Only)

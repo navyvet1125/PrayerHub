@@ -5,7 +5,6 @@ controller.index= function(req, res, next) {
 	console.log('REQUEST QUERY PARAMS', req.query);
 	var query = Pledge.find({});
 	//Returns listing of all pledges
-	// Pledge.find({})
 	query.exec()
 	.then(function(pledges){
 		//if it worked

@@ -5,6 +5,8 @@ var User		   = require('./models/user');
 
 var seedUser;
 var seedCause;
+
+//Clear database and reseed it with new information.
 User.remove({})
 	.then(function(){
     	return Cause.remove();

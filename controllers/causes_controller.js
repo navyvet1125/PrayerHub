@@ -86,14 +86,11 @@ controller.delete = function(req,res){
 	.then(function(cause){
 		//status update based on whether or not the cause exists
 		if(cause){
-			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', cause.id);
 			Pledge.find({ cause:cause.id }).remove().exec()
 			.then(function(pledges){
-				console.log(pledges);
 				res.status(200).send({status: 200, message:'Cause Successfully Deleted!'});
 			}).catch(function(err){
 				//error handling
-				console.log(err);
 				res.status(500).send(err);
 			});
 		}
@@ -101,7 +98,6 @@ controller.delete = function(req,res){
 	})
 	.catch(function(err){
 		//error handling
-		console.log(err);
 		res.status(500).send(err);
 	});
 

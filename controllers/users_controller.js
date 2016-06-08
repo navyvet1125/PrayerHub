@@ -33,19 +33,6 @@ controller.create = function(req,res){
 	});
 };
 
-controller.testshow = function(req,res){
-	//Find and show user if they exist
-	User.findById(req.params.id)
-	.then(function(user){
-		if(user)res.status(200).send(user);
-		else res.status(404).send({status: 404, message:'User not found!'});
-	})
-	.catch(function(err){
-		//error handling
-		res.status(500).send(err);
-	});
-};
-
 controller.show = function(req,res){
 	//Find and show user if they exist
 	User.findWithId(req.params.id)
