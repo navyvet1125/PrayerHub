@@ -106,9 +106,10 @@ controller.verifyEmail = function(req,res){
 controller.showPledges = function(req,res){
 	var query;
 	if(req.query.limit){
+		var limit = parseInt(req.query.limit);
 		//measure to mitigate a potential DoS attack
-		if(req.query.limit > 10) req.query.limit=10;
-		query =User.findPledgesById(req.params.id).limit(req.query.limit).sort({ pledgeAt: 1 });
+		if(limit > 10) limit=10;
+		query = User.findPledgesById(req.params.id).limit(limit).sort({ pledgeAt: 1 });
 	}
 	else {
 		query =User.findPledgesById(req.params.id);

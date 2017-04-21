@@ -3,13 +3,14 @@ var Cause = require('../models/cause');
 var Pledge = require('../models/pledge');
 var controller ={};
 
-controller.index= function(req, res, next) {
+controller.index = function(req, res, next) {
 	var query;
 	if(req.query.limit){
+		var limit = parseInt(req.query.limit);
 		//measure to mitigate a potential DoS attack
-		if(req.query.limit > 10) req.query.limit=10;
+		if(limit > 10) limit=10;
 
-		query = Cause.find({}).limit(req.query.limit);
+		query = Cause.find({}).limit(limit);
 	} else {
 		query = Cause.find({});
 	}
@@ -21,6 +22,7 @@ controller.index= function(req, res, next) {
 	})
 	.catch(function(err){
 		//if it didn't work
+		console.log(err);
 		res.status(500).send(err);
 	});
 };
