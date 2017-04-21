@@ -22,7 +22,7 @@ var passportFb = function(passport){
 			User.findOne({'email': profile.emails[0].value}, function(err,user){
 				if(err) return done(err);
 				if(user) {
-					if(user.avatar===undefined){
+					if(user.avatar!==profile.photos[0].value){
 						user.avatar=profile.photos[0].value;
 						user.save();
 					}
