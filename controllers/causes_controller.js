@@ -5,6 +5,7 @@ var controller ={};
 
 controller.index = function(req, res, next) {
 	var query;
+	console.log(req.user);
 	if(req.query.limit){
 		var limit = parseInt(req.query.limit);
 		//measure to mitigate a potential DoS attack
